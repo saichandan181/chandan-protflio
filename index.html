@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Sai Chandan</title>
+
+<link rel="icon" type="image/x-icon" href="https://github.com/saichandan181/ChandanGPT/blob/main/_img/favicon.png?raw=true" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+
+</style>
+</head>
+
+<body>
+
+<header id="header" class="header">
+<div class="container">
+<nav class="nav">
+<a href="#" class="nav__brand">@SAICHANDAN</i></a>
+<div class="nav__menu" id="nav-menu">
+<ul class="nav__list">
+<li class="nav__item"><a href="#about"    class="nav__link">ABOUT ME</a></li>
+<!-- <li class="nav__item"><a href="#service"  class="nav__link">SERVICES</a></li> -->
+<li class="nav__item"><a href="#projects" class="nav__link">PROJECTS</a></li>
+<li class="nav__item"><a href="#blogs"    class="nav__link">BLOG</a></li>
+<li class="nav__item"><a href="#contact"  class="nav__link">CONTACT ME </a></li>
+
+<!-- PLAY AUDIO -->
+
+<audio loop="" id="audioPlayer" style="display:none" autoplay muted>
+    <source src="./assets/audio/Believer.mp3" type="audio/mp3">
+</audio>
+
+<i id="playPauseIcon" class="fas fa-volume-mute" onclick="togglePlayPause()"></i>
+
+<script>
+    var audio = document.getElementById("audioPlayer");
+    var playPauseIcon = document.getElementById("playPauseIcon");
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            audio.muted = false; // Unmute when playing
+            playPauseIcon.className = "fas fa-volume-up"; // Change to volume up icon when playing
+        } else {
+            audio.pause();
+            audio.muted = true; // Mute when paused
+            playPauseIcon.className = "fas fa-volume-mute"; // Change to volume mute icon when paused
+        }
+    }
+</script>
+
+<!-- 
+<button onclick="togglePlayPause()">
+    <i id="playPauseIcon" class="fas fa-volume-up"></i>
+</button>
+
+<script>
+    var audio = document.getElementById("myAudio");
+    var playPauseIcon = document.getElementById("playPauseIcon");
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            playPauseIcon.className = "fas fa-volume-mute"; // Change to mute icon when playing
+        } else {
+            audio.pause();
+            playPauseIcon.className = "fas fa-volume-up"; // Change to speaker icon when paused
+        }
+    }
+</script>
+-->
+
+</ul>
+</div>
+<div class="nav__toggle">
+<i id="nav-toggle" class="ri-menu-3-line"></i>
+</div>
+</nav>
+</div>
+</header>
+
+<main class="main">
+<section id="hero" class="hero">
+<div class="container">
+<div class="d-grid hero__wrapper">
+<div class="hero__content">
+   
+<h1 class="hero__title">Hi, I'm SAI CHANDAN<br>A AI & ML STUDENT 🎓;<br>A AI & ML engineer 💻;</h1>
+</div>
+<img src="./assets/images/download__1_-removebg-preview.png" alt="@SAICHANDAN" class="hero__img"/>
+</div>
+</div>
+</section>
+
+<!-- About  -->
+
+<section id="about" class="section about">
+<div class="container">
+<div class="section__header">
+<h2 class="section__title">ABOUT ME</h2>
+<span class="section__subtitle">WHO AM I</span>
+</div>
+<div class="d-grid about__wrapper">
+<div class="about__content">
+<h3 class="about__title">I'M A AI ML ENGINEER</h3>
+<p class="about__description">
+    Hi Everyone, I am Sai Chandan from Bangalore, India. Currently, I am pursuing a bachelor's in Computer Science with a focus on AI and ML at DSU
+</p>
+<a href="./assets/images/Reddy Sai Chandna Sanda.pdf" class="btn btn--primary">Explore My Resume</a>
+</div>
+
+
+<div class="skills">
+<h3 class="skills__title">My Technical Skills</h3>
+<div class="skills__wrapper">
+<div class="skills__content">
+
+<ul class="skills__list">
+<li class="skills__item">
+<i class=""></i> □ Python
+</li>
+<li class="skills__item">
+<i class=""></i> □ Java
+</li>
+<li class="skills__item">
+<i class=""></i> □ C
+</li>
+<li class="skills__item">
+<i class=""></i> □ HTML
+</li>
+<li class="skills__item">
+<i class=""></i> □ CSS
+</li>
+<li class="skills__item">
+<i class=""></i> □ JS
+</li>
+<!-- <li class="skills__item">
+<i class=""></i> □ MongoDB
+</li>
+
+<li class="skills__item">
+<i class=""></i> □ Power BI
+</li>
+<li class="skills__item">
+<i class=""></i> □ Tableau
+</li> -->
+
+</ul>
+</div>
+<div class="skills__content">
+<ul class="skills__list">
+<li class="skills__item">
+<i class=""></i> □ Pandas
+</li>
+<li class="skills__item">
+<i class=""></i> □ NumPy
+</li>
+<li class="skills__item">
+<i class=""></i> □ Matplotlib
+</li>
+<li class="skills__item">
+<i class=""></i> □ Seaborn
+</li>
+<li class="skills__item">
+<i class=""></i> □ Scikit-learn
+</li>
+<li class="skills__item">
+<i class=""></i> □ Tensorflow
+</li>
+<li class="skills__item">
+<i class=""></i> □ Keras
+</li>
+<li class="skills__item">
+<i class=""></i> □ Pytorch
+</li>
+<!-- <li class="skills__item">
+<i class=""></i> □ Looker
+</li>
+<li class="skills__item">
+<i class=""></i> □ Netron
+</li> -->
+
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+
+<!-- services  -->
+<!-- <section id="service" class="section service">
+<div class="container">
+<div class="section__header">
+<h2 class="section__title">SERVICES</h2>
+<span class="section__subtitle">HOW CAN I HELP</span>
+</div>
+<div class="d-grid service__wrapper">
+
+<!-- service card 1 -->
+<!-- <div class="service__card">
+<div class="service__icon">
+</div>
+<h3 class="service__title">MACHINE LEARNING<br/>
+</h3>
+</div>
+
+<div class="service__card">
+<div class="service__icon">
+</div>
+<h3 class="service__title">DATA SCIENCE</h3>
+</div>
+
+<div class="service__card">
+<div class="service__icon">
+</div>
+<h3 class="service__title">CONTENT CREATION</h3>
+</div>
+</div>
+</div>
+</section> --> -->
+
+<!-- Projects -->
+<section id="projects" class="section project">
+<div class="container">
+<div class="section__header">
+<h2 class="section__title">Projects</h2>
+<span class="section__subtitle">My recent work</span>
+
+</div>
+<div class="d-grid project__wrapper">
+
+<!-- pr#1 -->
+<div class="project__content">
+<img src="https://chandan-gpt.vercel.app/_img/Gemini_language_model_logo%20(1).png" alt="project(1)" class="project__img"/>
+<h3 class="project__title">CHANDAN-GPT</h3>
+<p class="project__description">ChandanGPT is a personality AI chatbot trained on a massive dataset of text and code, with a focus on conversational skills and a wide range of knowledge. I have been fine-tuned by Chandan to be informative, comprehensive, engaging, and creative. My purpose is to assist users with a variety of writing tasks, including generating text, answering questions, and providing information.✨</p>
+<a href="https://github.com/saichandan181/ChandanGPT" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
+<a href="https://chandan-gpt.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
+</div>
+
+<!-- pr#2 -->
+<div class="project__content">
+<img src="https://github.com/saichandan181/Gemini-Vision-pro/blob/main/images/Screenshot%202024-03-14%20233821.png?raw=true" alt="project(2)" class="project__img"/>
+<h3 class="project__title">GEMINI-VISION-PRO</h3>
+<p class="project__description">Gemini Pro Vision is a Gemini large language vision model that understands input from text and visual modalities (image and video) in addition to text to generate relevant text responses.
+
+    Gemini Pro Vision is a foundation model that performs well at a variety of multimodal tasks such as visual understanding, classification, summarization, and creating content from image and video🚀🧬✨</p>
+<a href="https://github.com/saichandan181/Gemini-Vision-pro" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
+<a href="https://gemini-vision-pro.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
+</div>
+
+<!-- pr#3 -->
+<div class="project__content">
+<img src="https://currency-convertorr.vercel.app/img/money.png" alt="project(3)" class="project__img"/>
+<h3 class="project__title">CURRENCY CONVERTOR</h3>
+<p class="project__description">A currency converter web application that converts and calculates currency exchange rates using an API 📑✨</p>
+<a href="https://github.com/saichandan181/currency-convertorr" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
+<a href="https://currency-convertorr.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
+</div>
+</div>
+</div>
+</section>
+
+
+
+<!-- blog -->
+<section id="blogs" class="section project">
+<div class="container">
+<div class="section__header">
+<h2 class="section__title">BLOG</h2>
+<span class="section__subtitle">My recent posts</span>
+
+</div>
+<div class="d-grid project__wrapper">
+
+<!-- pr#1 -->
+<div class="project__content">
+<img src="./assets/images/blog-banner.png" alt="project(1)" class="project__img"/>
+<h3 class="project__title">BLOG #1</h3>
+<p class="project__description">##########</p>
+<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
+</div>
+
+<!-- pr#2 -->
+<div class="project__content">
+<img src="./assets/images/blog-banner.png" alt="project(2)" class="project__img"/>
+<h3 class="project__title">BLOG #2</h3>
+<p class="project__description">##########</p>
+<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
+</div>
+
+<!-- pr#3 -->
+<div class="project__content">
+<img src="./assets/images/blog-banner.png" alt="project(3)" class="project__img"/>
+<h3 class="project__title">BLOG #3</h3>
+<p class="project__description">##########</p>
+<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+<!--Contact -->
+<section id="contact" class="section contact">
+<div class="container">
+<div class="contact__wrapper">
+<div class="contact__content">
+<h2 class="contact__title">
+Interested in working together? Let's talk
+</h2>
+</div>
+<div class="contact__btn">
+<a href="mailto:sanda.rsc@icloud.com" target="_blank" class="btn btn--secondary">Get in touch</a>
+</div>
+</div>
+</div>
+
+</section>
+</main>
+
+<footer id="footer" class="footer">
+<div class="container">
+<div class="d-grid footer__wrapper">
+<div class="footer__content">
+<h4 class="footer__title">Follow Me</h4>
+<ul class="footer__social-list">
+    <li class="footer__social-item">
+        <a href="https://www.instagram.com/saichandan.sanda" class="footer__social-link">
+    <i class="ri-instagram-fill"></i>
+</a>
+</li>
+<li class="footer__social-item">
+<a href="https://twitter.com/saichandan181" class="footer__social-link">
+<i class="ri-twitter-fill"></i>
+</a>
+</li>
+
+<li class="footer__social-item">
+<a href="https://github.com/saichandan181/" class="footer__social-link">
+<i class="ri-github-fill"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="footer__content">
+<h4 class="footer__title">Email Me</h4>
+<a href="mailto:sanda.rsc@icloud.com" class="footer__contact">sanda.rsc@icloud.com</a>
+</div>
+</div>
+<p class="footer__copyright">Coded with Love ❤️ & Coffee ☕️</p>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="./assets/js/main.js"></script>
+</body>
+
+</html>
