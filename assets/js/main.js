@@ -313,6 +313,7 @@
   const rises = $$("[data-rise]");
   const zoomEl = $("[data-zoom]");
   const workItems = $$(".work-item");
+  const timelines = $$("[data-timeline]");
   const stickyMQ = window.matchMedia("(min-width: 901px)");
 
   const clearScrollFx = () => {
@@ -321,6 +322,7 @@
     workCards.forEach((c) => { c.style.removeProperty("--s"); c.style.removeProperty("--r"); c.style.removeProperty("--dim"); });
     portrait?.style.removeProperty("--py");
     highlightWords.forEach((w) => w.classList.add("on"));
+    timelines.forEach((t) => t.style.removeProperty("--tl"));
   };
 
   let scheduled = false;
@@ -373,6 +375,12 @@
       const n = Math.round(q * highlightWords.length);
       highlightWords.forEach((w, i) => w.classList.toggle("on", i < n));
     }
+
+    // Experience: the timeline line draws down as you read
+    timelines.forEach((t) => {
+      const r = t.getBoundingClientRect();
+      t.style.setProperty("--tl", clamp((vh * 0.75 - r.top) / (r.height || 1)).toFixed(3));
+    });
 
     // Expertise: cards rise up from a reclined 3D angle
     rises.forEach((card, i) => {
@@ -463,6 +471,19 @@
     tick();
     setInterval(tick, 30000);
   }
+  // "1 yr 3 mos" — counted inclusively, the way LinkedIn does, so it stays current
+  $$("[data-tenure]").forEach((el) => {
+    const [y, m] = el.dataset.since.split("-").map(Number);
+    const now = new Date();
+    const months = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m) + 1;
+    if (!(months > 0)) return;
+    const yrs = Math.floor(months / 12), mos = months % 12;
+    const parts = [];
+    if (yrs) parts.push(`${yrs} yr${yrs > 1 ? "s" : ""}`);
+    if (mos) parts.push(`${mos} mo${mos > 1 ? "s" : ""}`);
+    el.textContent = parts.join(" ");
+  });
+
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
@@ -579,6 +600,7 @@
 
   const ITEMS = [
     { group: "Go to", label: "About", icon: "i-arrow-right", run: go("#about"), keys: "who bio education" },
+    { group: "Go to", label: "Experience", icon: "i-arrow-right", run: go("#experience"), keys: "unisys job work history education certifications claude certified architect resume" },
     { group: "Go to", label: "Expertise", icon: "i-arrow-right", run: go("#expertise"), keys: "skills stack tech tools mobile ai salesforce" },
     { group: "Go to", label: "Selected work", icon: "i-arrow-right", run: go("#work"), keys: "projects portfolio" },
     { group: "Go to", label: "Now", icon: "i-arrow-right", run: go("#now"), keys: "learning ask" },
