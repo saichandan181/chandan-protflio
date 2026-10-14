@@ -1,400 +1,684 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" class="no-js">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sai Chandan — Mobile App Developer &amp; AI/ML Engineer</title>
+  <meta name="description" content="Sanda Reddy Sai Chandan — mobile app developer and AI/ML engineer from Bengaluru, India. React Native + Expo apps, generative AI, autonomous agents and Salesforce Agentforce." />
+  <meta name="author" content="Sanda Reddy Sai Chandan" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#070b10" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f8fa" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://saichandan.vercel.app/" />
 
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://saichandan.vercel.app/" />
+  <meta property="og:title" content="Sai Chandan — Mobile App Developer & AI/ML Engineer" />
+  <meta property="og:description" content="React Native apps, generative AI and autonomous agents. If I do it twice, an agent should do it the third time." />
+  <meta property="og:image" content="https://saichandan.vercel.app/assets/images/og.jpg" />
+  <meta property="og:image:alt" content="Sai Chandan — Mobile App Developer and AI/ML Engineer" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@saichandan181" />
 
-<title>Sai Chandan</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-<link rel="icon" type="image/x-icon" href="https://github.com/saichandan181/ChandanGPT/blob/main/_img/favicon.png?raw=true" />
+  <!-- Set theme + motion before first paint to avoid a flash -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.remove("no-js");
+      d.classList.add("js");
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") d.setAttribute("data-theme", t);
+        var m = localStorage.getItem("motion");
+        if (m === "reduced" || m === "full") d.setAttribute("data-motion", m);
+      } catch (e) {}
+    })();
+  </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="preload" as="image" href="assets/images/chandan-800.webp" type="image/webp" />
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
-integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-
-<link rel="stylesheet" href="assets/css/main.css" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<style>
-
-</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sanda Reddy Sai Chandan",
+    "alternateName": "Sai Chandan",
+    "url": "https://saichandan.vercel.app/",
+    "image": "https://saichandan.vercel.app/assets/images/chandan-800.jpg",
+    "jobTitle": "Mobile App Developer & AI/ML Engineer",
+    "email": "mailto:sanda.rsc@icloud.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Dayananda Sagar University" },
+    "knowsAbout": ["React Native", "Expo", "Generative AI", "Large Language Models", "AI Agents", "Salesforce Agentforce", "Python", "TypeScript"],
+    "sameAs": [
+      "https://github.com/saichandan181",
+      "https://linkedin.com/in/reddy-sai-chandan-851102300",
+      "https://twitter.com/saichandan181",
+      "https://instagram.com/saichandan.sanda"
+    ]
+  }
+  </script>
+  <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
+  <!-- Icon sprite (decorative; every use is aria-hidden) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3l14 9-14 9V3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2Z"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37ZM17.5 6.5h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path class="fill" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></symbol>
+  </svg>
 
-<header id="header" class="header">
-<div class="container">
-<nav class="nav">
-<a href="#" class="nav__brand">@SAICHANDAN</i></a>
-<div class="nav__menu" id="nav-menu">
-<ul class="nav__list">
-<li class="nav__item"><a href="#about"    class="nav__link">ABOUT ME</a></li>
-<!-- <li class="nav__item"><a href="#service"  class="nav__link">SERVICES</a></li> -->
-<li class="nav__item"><a href="#projects" class="nav__link">PROJECTS</a></li>
-<li class="nav__item"><a href="#blogs"    class="nav__link">BLOG</a></li>
-<li class="nav__item"><a href="#contact"  class="nav__link">CONTACT ME </a></li>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- PLAY AUDIO -->
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-<audio loop="" id="audioPlayer" style="display:none" autoplay muted>
-    <source src="./assets/audio/audio.mp3.crdownload" type="audio/mp3">
-</audio>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#main" class="brand" aria-label="Sai Chandan, back to top">
+        <span class="brand-mark" aria-hidden="true">sc</span>
+        <span class="brand-text">saichandan<span class="brand-dot">.</span></span>
+      </a>
 
-<i id="playPauseIcon" class="fas fa-volume-mute" onclick="togglePlayPause()"></i>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#now">Now</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
 
-<script>
-    var audio = document.getElementById("audioPlayer");
-    var playPauseIcon = document.getElementById("playPauseIcon");
+      <div class="header-actions">
+        <button type="button" class="palette-trigger" data-open-palette aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <span class="palette-trigger-label">Quick jump</span>
+          <kbd class="kbd" data-mod-key aria-hidden="true">Ctrl K</kbd>
+        </button>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Switch to light theme">
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <button type="button" class="icon-btn menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-    function togglePlayPause() {
-        if (audio.paused) {
-            audio.play();
-            audio.muted = false; // Unmute when playing
-            playPauseIcon.className = "fas fa-volume-up"; // Change to volume up icon when playing
-        } else {
-            audio.pause();
-            audio.muted = true; // Mute when paused
-            playPauseIcon.className = "fas fa-volume-mute"; // Change to volume mute icon when paused
-        }
-    }
-</script>
+  <main id="main" tabindex="-1">
 
-<!-- 
-<button onclick="togglePlayPause()">
-    <i id="playPauseIcon" class="fas fa-volume-up"></i>
-</button>
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
 
-<script>
-    var audio = document.getElementById("myAudio");
-    var playPauseIcon = document.getElementById("playPauseIcon");
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="status-pill">
+            <span class="status-dot" aria-hidden="true"></span>
+            Building apps &amp; agents · open to collaborations
+          </p>
 
-    function togglePlayPause() {
-        if (audio.paused) {
-            audio.play();
-            playPauseIcon.className = "fas fa-volume-mute"; // Change to mute icon when playing
-        } else {
-            audio.pause();
-            playPauseIcon.className = "fas fa-volume-up"; // Change to speaker icon when paused
-        }
-    }
-</script>
--->
+          <h1 id="hero-title" class="hero-title">
+            <span class="hero-hello">Hi, I’m</span>
+            <span class="hero-name">Sai Chandan</span>
+          </h1>
 
-</ul>
-</div>
-<div class="nav__toggle">
-<i id="nav-toggle" class="ri-menu-3-line"></i>
-</div>
-</nav>
-</div>
-</header>
+          <p class="hero-role">
+            <span class="sr-only">Mobile app developer, generative AI and deep learning engineer, autonomous AI agent builder, and Salesforce Agentforce developer.</span>
+            <span aria-hidden="true">I ship <span class="rotator" id="rotator"><span class="rotator-word">mobile apps</span></span></span>
+          </p>
 
-<main class="main">
-<section id="hero" class="hero">
-<div class="container">
-<div class="d-grid hero__wrapper">
-<div class="hero__content">
-   
-<h1 class="hero__title">Welcome to my portfolio! I’m Sanda Reddy Sai Chandan, a driven student at Dayananda Sagar University, where I’m shaping my journey in CSE <BR>AI & ML💻;</h1>
-</div>
-<img src="./assets/images/main.jpg" alt="@SAICHANDAN" class="hero__img"/>
-</div>
-</div>
-</section>
+          <p class="hero-lede">
+            Mobile app developer &amp; AI/ML engineer from Bengaluru. I build
+            React&nbsp;Native apps, generative-AI products and autonomous agents —
+            and wire them into places like Salesforce without blowing up governor limits.
+          </p>
 
-<!-- About  -->
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#work">
+              See my work
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#contact">Let’s talk</a>
+            <a class="btn btn-link" href="assets/images/Sanda%20Reddy%20Sai%20Chandan-Eng21am0108.pdf" download="Sai-Chandan-Resume.pdf">
+              <svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>
+              Résumé <span class="sr-only">(PDF download)</span>
+            </a>
+          </div>
 
-<section id="about" class="section about">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">ABOUT ME</h2>
-<span class="section__subtitle">WHO AM I</span>
-</div>
-<div class="d-grid about__wrapper">
-<div class="about__content">
-<h3 class="about__title">I'M A Computer Science Engineer</h3>
-<p class="about__description">
-    Hi Everyone, I am Sai Chandan from Bangalore, India. Currently, I am pursuing a bachelor's in Computer Science with a focus on AI and ML at DSU
-</p>
-<a href="./assets/images/Reddy Sai Chandna Sanda.pdf" class="btn btn--primary">Explore My Resume</a>
-</div>
+          <ul class="hero-social" role="list" aria-label="Social profiles">
+            <li><a href="https://github.com/saichandan181" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a></li>
+            <li><a href="https://linkedin.com/in/reddy-sai-chandan-851102300" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+            <li><a href="https://twitter.com/saichandan181" target="_blank" rel="noopener noreferrer" aria-label="X, formerly Twitter (opens in new tab)"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></a></li>
+            <li><a href="https://instagram.com/saichandan.sanda" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in new tab)"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+          </ul>
+        </div>
 
+        <!-- Interactive terminal -->
+        <section class="terminal" aria-labelledby="terminal-title">
+          <div class="terminal-bar">
+            <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <h2 id="terminal-title" class="terminal-title">
+              <svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg>
+              chandan@portfolio: ~
+            </h2>
+          </div>
+          <div class="terminal-body" id="terminal-body">
+            <div class="terminal-log" id="terminal-log" role="log" aria-live="polite" aria-label="Terminal output" tabindex="0">
+              <div class="t-line"><span class="t-prompt" aria-hidden="true">❯</span> <span class="t-cmd">cat about.yaml</span></div>
+<pre class="t-out t-yaml"><span class="k">name:</span> <span class="s">Sanda Reddy Sai Chandan</span>
+<span class="k">location:</span> <span class="s">Bengaluru, India</span>
+<span class="k">role:</span> <span class="s">Mobile App Dev &amp; AI/ML Engineer</span>
+<span class="k">focus:</span>
+  - <span class="s">React Native + Expo (iOS &amp; Android)</span>
+  - <span class="s">Generative AI, LLMs &amp; deep learning</span>
+  - <span class="s">Autonomous agents &amp; orchestration</span>
+  - <span class="s">Salesforce (Agentforce, Apex, Flow)</span>
+<span class="k">fun_fact:</span> <span class="s">"I think I am funny."</span></pre>
+              <p class="t-out t-hint">Type <code>help</code> and press Enter — or tap a command below.</p>
+            </div>
+            <form class="terminal-form" id="terminal-form" autocomplete="off">
+              <label for="terminal-input" class="sr-only">Terminal command. Type help for a list of commands.</label>
+              <span class="t-prompt" aria-hidden="true">❯</span>
+              <input id="terminal-input" class="terminal-input" type="text" spellcheck="false" autocapitalize="off" enterkeyhint="send" placeholder="type a command…" />
+            </form>
+          </div>
+          <div class="terminal-chips" role="group" aria-label="Suggested commands">
+            <button type="button" data-cmd="help">help</button>
+            <button type="button" data-cmd="projects">projects</button>
+            <button type="button" data-cmd="joke">joke</button>
+            <button type="button" data-cmd="sudo hire-me">sudo hire-me</button>
+          </div>
+        </section>
+      </div>
 
-<div class="skills">
-<h3 class="skills__title">My Technical Skills</h3>
-<div class="skills__wrapper">
-<div class="skills__content">
+      <a class="scroll-cue" href="#about">
+        <span>Scroll</span>
+        <span class="scroll-cue-line" aria-hidden="true"></span>
+        <span class="sr-only">to About section</span>
+      </a>
+    </section>
 
-<ul class="skills__list">
-
-<!-- <li class="skills__item">
-<i class=""></i> □ Java
-</li> -->
-<!-- <li class="skills__item">
-<i class=""></i> □ C
- </li> -->
-<li class="skills__item">
-<i class=""></i> □ HTML
-</li>
-<li class="skills__item">
-<i class=""></i> □ CSS
-</li>
-<li class="skills__item">
-<i class=""></i> □ JS
-</li>
-<li class="skills__item">
-    <i class=""></i> □ SQL
-    </li>
- <li class="skills__item">
-<i class=""></i> □ PYTHON
-</li>
-<li class="skills__item">
-    <i class=""></i> □ JAVA
-    </li>
-
-<!-- <li class="skills__item">
-<i class=""></i> □ Power BI
-</li>
-<li class="skills__item">
-<i class=""></i> □ Tableau
-</li> --> 
-
-</ul>
-</div>
-<div class="skills__content">
-<ul class="skills__list">
-<li class="skills__item">
-<i class=""></i> □ Pandas
-</li>
-<li class="skills__item">
-<i class=""></i> □ NumPy
-</li>
-<li class="skills__item">
-<i class=""></i> □ Matplotlib
-</li>
-<li class="skills__item">
-<i class=""></i> □ Seaborn
-</li>
-<li class="skills__item">
-<i class=""></i> □ Scikit-learn
-</li>
-<li class="skills__item">
-<i class=""></i> □ Tensorflow
-</li>
-<li class="skills__item">
-<i class=""></i> □ Keras
-</li>
-<li class="skills__item">
-<i class=""></i> □ Pytorch
-</li>
-<!-- <li class="skills__item">
-<i class=""></i> □ Looker
-</li>
-<li class="skills__item">
-<i class=""></i> □ Netron
-</li> -->
-
-</ul>
-</div>
-</div>
-</div>
-
-</section>
-
-<!-- services  -->
-<!-- <section id="service" class="section service">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">SERVICES</h2>
-<span class="section__subtitle">HOW CAN I HELP</span>
-</div>
-<div class="d-grid service__wrapper">
-
-<!-- service card 1 -->
-<!-- <div class="service__card">
-<div class="service__icon">
-</div>
-<h3 class="service__title">MACHINE LEARNING<br/>
-</h3>
-</div>
-
-<div class="service__card">
-<div class="service__icon">
-</div>
-<h3 class="service__title">DATA SCIENCE</h3>
-</div>
-
-<div class="service__card">
-<div class="service__icon">
-</div>
-<h3 class="service__title">CONTENT CREATION</h3>
-</div>
-</div>
-</div>
-</section> --> 
-
-<!-- Projects -->
-<section id="projects" class="section project">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">Projects</h2>
-<span class="section__subtitle">My recent work</span>
-
-</div>
-<div class="d-grid project__wrapper">
-
-    <!-- pr#1 -->
-<div class="project__content">
-    <img src="assets/images/ezgif.com-animated-gif-maker.gif" alt="project(1)" class="project__img"/>
-    <h3 class="project__title">AI Hub</h3>
-    <p class="project__description">where you can find any AI tools you need, from productivity to creativity. This is the concept behind a website that houses a collection of AI tools. Such a platform aims to streamline various tasks and provide users with a convenient, one-stop solution for their diverse needs.With help of Generative AI model. I have developed this.✨</p>
-    <a href="#" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-    <a href="https://aihubtool.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>React Native</span><span>Expo</span><span>TypeScript</span><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>Gemini</span><span>Claude Agent SDK</span><span>MCP</span><span>Agentforce</span><span>Apex</span><span>Next.js</span><span>FastAPI</span><span>Supabase</span><span>Docker</span><span>AWS</span>
+        <span>React Native</span><span>Expo</span><span>TypeScript</span><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>Gemini</span><span>Claude Agent SDK</span><span>MCP</span><span>Agentforce</span><span>Apex</span><span>Next.js</span><span>FastAPI</span><span>Supabase</span><span>Docker</span><span>AWS</span>
+      </div>
     </div>
 
-<!-- pr#1 -->
-<div class="project__content">
-<img src="https://chandan-gpt.vercel.app/_img/Gemini_language_model_logo%20(1).png" alt="project(1)" class="project__img"/>
-<h3 class="project__title">CHANDAN-GPT</h3>
-<p class="project__description">ChandanGPT is a personality AI chatbot trained on a massive dataset of text and code, with a focus on conversational skills and a wide range of knowledge. I have been fine-tuned by Chandan to be informative, comprehensive, engaging, and creative. My purpose is to assist users with a variety of writing tasks, including generating text, answering questions, and providing information.✨</p>
-<a href="https://github.com/saichandan181/ChandanGPT" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-<a href="https://chandan-gpt.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
-</div>
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow"><span aria-hidden="true">01 /</span> About</p>
+          <h2 id="about-title" class="section-title">Engineer by training, <em>automator</em> by instinct.</h2>
+        </header>
 
-<!-- pr#2 -->
-<div class="project__content">
-<img src="assets/images/Screenshot (39).png" alt="project(2)" class="project__img"/>
-<h3 class="project__title">GEMINI-VISION-PRO</h3>
-<p class="project__description">Gemini Pro Vision is a Gemini large language vision model that understands input from text and visual modalities (image and video) in addition to text to generate relevant text responses.
+        <div class="bento">
+          <article class="card bento-intro reveal">
+            <h3 class="card-kicker">Who I am</h3>
+            <p class="lead">
+              I’m <strong>Sanda Reddy Sai Chandan</strong> — a computer science engineer specialising in
+              AI&nbsp;&amp;&nbsp;ML. These days I split my time between shipping cross-platform mobile apps with
+              React&nbsp;Native&nbsp;+&nbsp;Expo and building generative-AI systems: LLM apps, multimodal vision
+              tools and multi-agent pipelines that plan, act and verify their own work.
+            </p>
+            <p>
+              I also do Salesforce platform engineering — Agentforce, Apex, Flow and the Tooling API — and
+              full-stack web with React, Next.js, Node and Python. I care about software that is fast,
+              honest about what it does, and usable by everyone.
+            </p>
+          </article>
 
-    Gemini Pro Vision is a foundation model that performs well at a variety of multimodal tasks such as visual understanding, classification, summarization, and creating content from image and video🚀🧬✨</p>
-<a href="https://github.com/saichandan181/Gemini-Vision-pro" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-<a href="https://gemini-vision-pro.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
-</div>
+          <figure class="card bento-photo reveal">
+            <picture>
+              <source type="image/webp" srcset="assets/images/chandan-480.webp 480w, assets/images/chandan-800.webp 800w" sizes="(min-width: 960px) 360px, 90vw" />
+              <img src="assets/images/chandan-800.jpg" width="800" height="1000" alt="Sai Chandan smiling in an orange life jacket on a woven coracle boat beside a fluffy husky, with rocky cliffs and a river behind them." loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Off the keyboard: rivers, road trips &amp; very good dogs.</figcaption>
+          </figure>
 
-<!-- pr#3 -->
-<div class="project__content">
-<img src="https://currency-convertorr.vercel.app/img/money.png" alt="project(3)" class="project__img"/>
-<h3 class="project__title">CURRENCY CONVERTOR</h3>
-<p class="project__description">A currency converter web application that converts and calculates currency exchange rates using an API 📑✨</p>
-<a href="https://github.com/saichandan181/currency-convertorr" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-<a href="https://currency-convertorr.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
-</div>
-</div>
-</div>
-</section>
+          <blockquote class="card bento-quote reveal">
+            <svg class="icon quote-icon" aria-hidden="true"><use href="#i-spark"/></svg>
+            <p>“If I do it twice, an agent should do it the third time.”</p>
+            <footer>— my engineering philosophy</footer>
+          </blockquote>
 
+          <article class="card bento-place reveal">
+            <h3 class="card-kicker"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Based in</h3>
+            <p class="big">Bengaluru, India</p>
+            <p class="muted">Local time <time id="local-time" class="mono">IST</time></p>
+          </article>
 
+          <article class="card bento-edu reveal">
+            <h3 class="card-kicker"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg> Education</h3>
+            <p class="big">Dayananda Sagar University</p>
+            <p class="muted">B.E. Computer Science — AI &amp; ML · 2021 – 2025</p>
+          </article>
 
-<!-- blog -->
-<!-- <section id="blogs" class="section project">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">BLOG</h2>
-<span class="section__subtitle">My recent posts</span> -->
+          <article class="card bento-certs reveal">
+            <h3 class="card-kicker"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg> Certifications</h3>
+            <ul class="tick-list" role="list">
+              <li>ServiceNow Certified System Administrator</li>
+              <li>JavaScript — HackerRank</li>
+              <li>Machine Learning with Python — Great Learning</li>
+            </ul>
+          </article>
 
-<!-- </div>
-<div class="d-grid project__wrapper"> -->
+          <article class="card bento-fun reveal">
+            <h3 class="card-kicker"><svg class="icon" aria-hidden="true"><use href="#i-smile"/></svg> Fun fact</h3>
+            <p class="big">I think I am funny.</p>
+            <button type="button" class="btn btn-small" id="joke-btn">Prove it</button>
+            <p class="joke-out" id="joke-out" aria-live="polite"></p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<!-- pr#1 -->
-<!-- <div class="project__content">
-<img src="./assets/images/blog-banner.png" alt="project(1)" class="project__img"/>
-<h3 class="project__title">BLOG #1</h3>
-<p class="project__description">##########</p>
-<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
-</div> -->
+    <!-- ============ STACK ============ -->
+    <section class="section" id="stack" aria-labelledby="stack-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow"><span aria-hidden="true">02 /</span> Stack</p>
+          <h2 id="stack-title" class="section-title">Tools I reach for.</h2>
+          <p class="section-sub">From on-device mobile to cloud agents — the stack I use to go from idea to shipped.</p>
+        </header>
 
-<!-- pr#2 -->
-<!-- <div class="project__content">
-<img src="./assets/images/blog-banner.png" alt="project(2)" class="project__img"/>
-<h3 class="project__title">BLOG #2</h3>
-<p class="project__description">##########</p>
-<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
-</div> -->
+        <div class="stack-filter reveal">
+          <label for="stack-search">Filter technologies</label>
+          <div class="input-wrap">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="stack-search" type="search" placeholder="Try “python” or “expo”" aria-describedby="stack-count" />
+          </div>
+          <p id="stack-count" class="muted small" aria-live="polite"></p>
+        </div>
 
-<!-- pr#3 -->
-<!-- <div class="project__content">
-<img src="./assets/images/blog-banner.png" alt="project(3)" class="project__img"/>
-<h3 class="project__title">BLOG #3</h3>
-<p class="project__description">##########</p>
-<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
-</div>
-</div>
-</div> -->
-<!-- </section> -->
+        <div class="stack-grid">
+          <article class="card stack-group reveal" data-accent="1">
+            <h3>Languages</h3>
+            <ul role="list" class="chips">
+              <li>Python</li><li>TypeScript</li><li>JavaScript</li><li>Java</li><li>C</li><li>Apex</li><li>SQL</li><li>HTML5</li><li>CSS3</li>
+            </ul>
+          </article>
+          <article class="card stack-group reveal" data-accent="2">
+            <h3>AI / ML &amp; Agents</h3>
+            <ul role="list" class="chips">
+              <li>TensorFlow</li><li>PyTorch</li><li>scikit-learn</li><li>OpenCV</li><li>Pandas</li><li>NumPy</li><li>Seaborn</li><li>Claude Agent SDK</li><li>Gemini</li><li>MCP</li><li>Agentforce</li>
+            </ul>
+          </article>
+          <article class="card stack-group reveal" data-accent="3">
+            <h3>Mobile</h3>
+            <ul role="list" class="chips">
+              <li>React Native</li><li>Expo</li><li>Expo Router</li><li>EAS Build</li><li>OTA updates</li>
+            </ul>
+          </article>
+          <article class="card stack-group reveal" data-accent="4">
+            <h3>Frontend</h3>
+            <ul role="list" class="chips">
+              <li>React</li><li>Next.js</li><li>Tailwind CSS</li>
+            </ul>
+          </article>
+          <article class="card stack-group reveal" data-accent="5">
+            <h3>Backend &amp; Data</h3>
+            <ul role="list" class="chips">
+              <li>FastAPI</li><li>Django</li><li>Flask</li><li>Node.js</li><li>Express</li><li>MongoDB</li><li>MySQL</li><li>PostgreSQL</li><li>Supabase</li>
+            </ul>
+          </article>
+          <article class="card stack-group reveal" data-accent="6">
+            <h3>Cloud &amp; DevOps</h3>
+            <ul role="list" class="chips">
+              <li>AWS</li><li>Vercel</li><li>Heroku</li><li>Docker</li><li>Podman</li><li>GitHub Actions</li><li>Git</li>
+            </ul>
+          </article>
+        </div>
+        <p class="stack-empty muted" id="stack-empty" hidden>Nothing matches that — but I’m probably learning it. Ask me!</p>
+      </div>
+    </section>
 
+    <!-- ============ WORK ============ -->
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow"><span aria-hidden="true">03 /</span> Work</p>
+          <h2 id="work-title" class="section-title">Selected projects.</h2>
+          <p class="section-sub">Agents, AI apps and the APIs behind them.</p>
+        </header>
 
+        <div class="filters reveal" role="group" aria-label="Filter projects by category">
+          <button type="button" class="filter" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter" data-filter="ai" aria-pressed="false">AI &amp; Agents</button>
+          <button type="button" class="filter" data-filter="web" aria-pressed="false">Full-stack</button>
+          <button type="button" class="filter" data-filter="backend" aria-pressed="false">Backend</button>
+        </div>
+        <p class="sr-only" id="work-status" role="status"></p>
 
+        <ul class="projects" role="list" id="projects">
+          <li class="project reveal" data-tags="ai backend" data-repo="polyagent">
+            <article class="card project-card" aria-labelledby="p-polyagent">
+              <div class="project-cover" data-hue="190" aria-hidden="true"><span class="project-num">01</span><span class="project-glyph">⟁</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>TypeScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-polyagent">polyagent</h3>
+                <p>Multi-tenant trading agent for Polymarket with isolated per-tenant strategy execution — each tenant’s agent runs in its own sandbox with its own rules.</p>
+                <ul class="tags" role="list"><li>AI Agents</li><li>Multi-tenant</li><li>TypeScript</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/saichandan181/polyagent" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for polyagent on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
 
-<!--Contact -->
-<section id="contact" class="section contact">
-<div class="container">
-<div class="contact__wrapper">
-<div class="contact__content">
-<h2 class="contact__title">
-Interested in working together? Let's talk
-</h2>
-</div>
-<div class="contact__btn">
-<a href="mailto:sanda.rsc@icloud.com" target="_blank" class="btn btn--secondary">Get in touch</a>
-</div>
-</div>
-</div>
+          <li class="project reveal" data-tags="ai web" data-repo="Gemini-Vision-pro">
+            <article class="card project-card" aria-labelledby="p-gemini">
+              <div class="project-cover" data-hue="265" aria-hidden="true"><span class="project-num">02</span><span class="project-glyph">◉</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>Python</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-gemini">Gemini Vision Pro</h3>
+                <p>Multimodal object recognition on Gemini Pro Vision: point a camera or upload an image, ask a question, and get a reasoned description of what it sees back.</p>
+                <ul class="tags" role="list"><li>Generative AI</li><li>Multimodal</li><li>Gemini</li></ul>
+                <div class="project-links">
+                  <a href="https://gemini-vision-pro.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only">of Gemini Vision Pro (opens in new tab)</span>
+                  </a>
+                  <a href="https://github.com/saichandan181/Gemini-Vision-pro" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for Gemini Vision Pro on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
 
-</section>
-</main>
+          <li class="project reveal" data-tags="ai web" data-repo="testvibe-pos">
+            <article class="card project-card" aria-labelledby="p-testvibe">
+              <div class="project-cover" data-hue="150" aria-hidden="true"><span class="project-num">03</span><span class="project-glyph">✓</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>TypeScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-testvibe">testvibe-pos</h3>
+                <p>AI-assisted test generation and execution for point-of-sale workflows — getting an LLM to write tests that don’t just assert <code>true === true</code>.</p>
+                <ul class="tags" role="list"><li>LLM testing</li><li>Eval harness</li><li>TypeScript</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/saichandan181/testvibe-pos" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for testvibe-pos on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
 
-<footer id="footer" class="footer">
-<div class="container">
-<div class="d-grid footer__wrapper">
-<div class="footer__content">
-<h4 class="footer__title">Follow Me</h4>
-<ul class="footer__social-list">
-    <li class="footer__social-item">
-        <a href="https://www.instagram.com/saichandan.sanda" class="footer__social-link">
-    <i class="ri-instagram-fill"></i>
-</a>
-</li>
-<li class="footer__social-item">
-<a href="https://twitter.com/saichandan181" class="footer__social-link">
-<i class="ri-twitter-fill"></i>
-</a>
-</li>
+          <li class="project reveal" data-tags="backend" data-repo="backendapi-pos">
+            <article class="card project-card" aria-labelledby="p-backendapi">
+              <div class="project-cover" data-hue="30" aria-hidden="true"><span class="project-num">04</span><span class="project-glyph">{ }</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>Python</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-backendapi">backendapi-pos</h3>
+                <p>The Python API layer powering the POS platform — FastAPI services that the web and test surfaces build on.</p>
+                <ul class="tags" role="list"><li>FastAPI</li><li>REST</li><li>Python</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/saichandan181/backendapi-pos" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for backendapi-pos on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
 
-<li class="footer__social-item">
-<a href="https://github.com/saichandan181/" class="footer__social-link">
-<i class="ri-github-fill"></i>
-</a>
-</li>
-</ul>
-</div>
-<div class="footer__content">
-<h4 class="footer__title">Email Me</h4>
-<a href="mailto:sanda.rsc@icloud.com" class="footer__contact">sanda.rsc@icloud.com</a>
-</div>
-</div>
-<p class="footer__copyright">Coded with Love ❤️ & Coffee ☕️</p>
-</div>
-</footer>
+          <li class="project reveal" data-tags="ai web" data-repo="aiexpensetracker">
+            <article class="card project-card" aria-labelledby="p-expense">
+              <div class="project-cover" data-hue="330" aria-hidden="true"><span class="project-num">05</span><span class="project-glyph">₹</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>JavaScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-expense">AI Expense Tracker</h3>
+                <p>Expense tracking that categorises your spending with an LLM and turns it into plain-language insights.</p>
+                <ul class="tags" role="list"><li>LLM</li><li>Categorisation</li><li>JavaScript</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/saichandan181/aiexpensetracker" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for AI Expense Tracker on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/scrollreveal"></script>
-<script src="./assets/js/main.js"></script>
+          <li class="project reveal" data-tags="web" data-repo="onlyus">
+            <article class="card project-card" aria-labelledby="p-onlyus">
+              <div class="project-cover" data-hue="0" aria-hidden="true"><span class="project-num">06</span><span class="project-glyph">♡</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>TypeScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-onlyus">onlyus</h3>
+                <p>A full-stack TypeScript side project — the playground where I try new patterns end to end.</p>
+                <ul class="tags" role="list"><li>Full-stack</li><li>TypeScript</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/saichandan181/onlyus" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for onlyus on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="project reveal" data-tags="ai web" data-repo="ChandanGPT">
+            <article class="card project-card" aria-labelledby="p-chandangpt">
+              <div class="project-cover" data-hue="215" aria-hidden="true"><span class="project-num">07</span><span class="project-glyph">✦</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>JavaScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-chandangpt">ChandanGPT</h3>
+                <p>A personality chatbot tuned to be informative, engaging and a little bit me — answering questions and helping with writing tasks.</p>
+                <ul class="tags" role="list"><li>Chatbot</li><li>LLM</li><li>Web</li></ul>
+                <div class="project-links">
+                  <a href="https://chandan-gpt.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only">of ChandanGPT (opens in new tab)</span>
+                  </a>
+                  <a href="https://github.com/saichandan181/ChandanGPT" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for ChandanGPT on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="project reveal" data-tags="ai web">
+            <article class="card project-card" aria-labelledby="p-aihub">
+              <div class="project-cover" data-hue="45" aria-hidden="true"><span class="project-num">08</span><span class="project-glyph">▦</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang">Web</span></p>
+                <h3 id="p-aihub">AI Hub</h3>
+                <p>A one-stop directory of AI tools — productivity to creativity — curated and described with help from a generative model.</p>
+                <ul class="tags" role="list"><li>Directory</li><li>Generative AI</li></ul>
+                <div class="project-links">
+                  <a href="https://aihubtool.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only">of AI Hub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="project reveal" data-tags="web" data-repo="currency-convertorr">
+            <article class="card project-card" aria-labelledby="p-currency">
+              <div class="project-cover" data-hue="105" aria-hidden="true"><span class="project-num">09</span><span class="project-glyph">⇄</span></div>
+              <div class="project-body">
+                <p class="project-meta"><span class="lang" data-lang>JavaScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p-currency">Currency Converter</h3>
+                <p>Real-time exchange rates across dozens of currencies via a live API, with a clean, responsive interface and robust error handling.</p>
+                <ul class="tags" role="list"><li>REST API</li><li>Vanilla JS</li></ul>
+                <div class="project-links">
+                  <a href="https://currency-convertorr.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only">of Currency Converter (opens in new tab)</span>
+                  </a>
+                  <a href="https://github.com/saichandan181/currency-convertorr" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> Source <span class="sr-only">code for Currency Converter on GitHub (opens in new tab)</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ul>
+
+        <p class="more-link reveal">
+          <a href="https://github.com/saichandan181?tab=repositories" target="_blank" rel="noopener noreferrer" class="link-arrow">
+            Browse all repositories on GitHub <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only">(opens in new tab)</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ NOW ============ -->
+    <section class="section" id="now" aria-labelledby="now-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow"><span aria-hidden="true">04 /</span> Now</p>
+          <h2 id="now-title" class="section-title">What I’m learning right now.</h2>
+        </header>
+
+        <div class="now-grid">
+          <ol class="learning reveal" role="list">
+            <li>
+              <span class="learning-num" aria-hidden="true">01</span>
+              <div><h3>Multi-agent orchestration</h3><p>Planner → worker → verifier loops that check their own output.</p></div>
+            </li>
+            <li>
+              <span class="learning-num" aria-hidden="true">02</span>
+              <div><h3>MCP server design</h3><p>Tool allowlisting and guardrails that enterprises can actually sign off on.</p></div>
+            </li>
+            <li>
+              <span class="learning-num" aria-hidden="true">03</span>
+              <div><h3>Sandboxed agent execution</h3><p>Running agents safely inside rootless containers.</p></div>
+            </li>
+            <li>
+              <span class="learning-num" aria-hidden="true">04</span>
+              <div><h3>Evaluating non-deterministic AI</h3><p>Evaluation harnesses for output that’s different every run.</p></div>
+            </li>
+            <li>
+              <span class="learning-num" aria-hidden="true">05</span>
+              <div><h3>Domain-specific LLMs</h3><p>Fine-tuning and retrieval strategies that fit the domain.</p></div>
+            </li>
+          </ol>
+
+          <div class="ask reveal">
+            <h3 class="ask-title">Ask me about</h3>
+            <details class="faq" name="ask">
+              <summary>Picking the right language for the job</summary>
+              <p>Python, JavaScript/TypeScript, Java, HTML/CSS — and where each one actually earns its keep.</p>
+            </details>
+            <details class="faq" name="ask">
+              <summary>Building generative-AI apps on multimodal models</summary>
+              <p>Prompting, grounding and UX patterns for apps that see, read and reason — like Gemini Vision Pro.</p>
+            </details>
+            <details class="faq" name="ask">
+              <summary>Shipping React Native apps with Expo</summary>
+              <p>EAS builds, OTA updates, and the config-plugin escape hatch when a native module fights back.</p>
+            </details>
+            <details class="faq" name="ask">
+              <summary>Wiring AI agents into Salesforce</summary>
+              <p>Agentforce, Apex and Flow — without blowing up governor limits.</p>
+            </details>
+            <details class="faq" name="ask">
+              <summary>Getting LLMs to write useful tests</summary>
+              <p>Tests that don’t just assert <code>true === true</code> — evals, fixtures and verification loops.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-card reveal">
+          <p class="eyebrow"><span aria-hidden="true">05 /</span> Contact</p>
+          <h2 id="contact-title" class="contact-title">Got an idea that needs an app — <span class="grad">or an agent?</span></h2>
+          <p class="section-sub">I’m open to collaborations, freelance work and interesting problems. My inbox is always open.</p>
+
+          <div class="contact-actions">
+            <a class="btn btn-primary btn-lg" href="mailto:sanda.rsc@icloud.com">
+              <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+              sanda.rsc@icloud.com
+            </a>
+            <button type="button" class="btn btn-ghost btn-lg" data-copy-email>
+              <svg class="icon icon-copy" aria-hidden="true"><use href="#i-copy"/></svg>
+              <span data-copy-label>Copy email</span>
+            </button>
+          </div>
+
+          <ul class="contact-social" role="list">
+            <li><a href="https://github.com/saichandan181" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub <span class="sr-only">(opens in new tab)</span></a></li>
+            <li><a href="https://linkedin.com/in/reddy-sai-chandan-851102300" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg> LinkedIn <span class="sr-only">(opens in new tab)</span></a></li>
+            <li><a href="https://twitter.com/saichandan181" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg> X <span class="sr-only">(formerly Twitter, opens in new tab)</span></a></li>
+            <li><a href="https://instagram.com/saichandan.sanda" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg> Instagram <span class="sr-only">(opens in new tab)</span></a></li>
+            <li><a href="https://www.buymeacoffee.com/saichandan" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-coffee"/></svg> Buy me a coffee <span class="sr-only">(opens in new tab)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Sanda Reddy Sai Chandan. Hand-built with HTML, CSS &amp; a little JavaScript — no frameworks.</p>
+      <div class="footer-actions">
+        <button type="button" class="btn btn-small btn-ghost" id="motion-toggle" aria-pressed="false">
+          <svg class="icon icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+          <svg class="icon icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+          <span data-motion-label>Pause animations</span>
+        </button>
+        <a href="#top" class="btn btn-small btn-ghost" data-back-to-top>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg> Back to top
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ COMMAND PALETTE ============ -->
+  <dialog class="palette" id="palette" aria-labelledby="palette-title">
+    <div class="palette-inner">
+      <h2 id="palette-title" class="sr-only">Quick jump</h2>
+      <div class="palette-search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="palette-input" type="text" role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" aria-label="Search sections, projects and actions" placeholder="Search sections, projects, actions…" autocomplete="off" spellcheck="false" />
+        <button type="button" class="kbd kbd-btn" data-close-palette aria-label="Close quick jump">Esc</button>
+      </div>
+      <ul id="palette-list" class="palette-list" role="listbox" aria-label="Results"></ul>
+      <p class="palette-foot" aria-hidden="true"><span><kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> move</span><span><kbd class="kbd">↵</kbd> select</span><span><kbd class="kbd">Esc</kbd> close</span></p>
+      <p class="sr-only" id="palette-status" role="status"></p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
-
 </html>
