@@ -1,400 +1,643 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" class="no-js">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sai Chandan — Software Engineer, Mobile &amp; AI</title>
+  <meta name="description" content="Sanda Reddy Sai Chandan — Associate Software Engineer at Unisys and Claude Certified Architect in Bengaluru, India. Mobile apps with React Native + Expo, generative AI, autonomous agents and Salesforce Agentforce." />
+  <meta name="author" content="Sanda Reddy Sai Chandan" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f3f1ec" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)" />
+  <link rel="canonical" href="https://saichandan.vercel.app/" />
 
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://saichandan.vercel.app/" />
+  <meta property="og:title" content="Sai Chandan — Software Engineer at Unisys · Mobile &amp; AI" />
+  <meta property="og:description" content="Mobile apps, generative AI and autonomous agents. If I do it twice, an agent should do it the third time." />
+  <meta property="og:image" content="https://saichandan.vercel.app/assets/images/og.jpg" />
+  <meta property="og:image:alt" content="Sai Chandan — Mobile App Developer and AI/ML Engineer" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@saichandan181" />
 
-<title>Sai Chandan</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-<link rel="icon" type="image/x-icon" href="https://github.com/saichandan181/ChandanGPT/blob/main/_img/favicon.png?raw=true" />
+  <!-- Theme + motion preference before first paint (no flash) -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.remove("no-js");
+      d.classList.add("js");
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") d.setAttribute("data-theme", t);
+        var m = localStorage.getItem("motion");
+        if (m === "reduced" || m === "full") d.setAttribute("data-motion", m);
+      } catch (e) {}
+    })();
+  </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400..800;1,400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="preload" as="image" href="assets/images/chandan-800.webp" type="image/webp" />
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
-integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-
-<link rel="stylesheet" href="assets/css/main.css" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<style>
-
-</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sanda Reddy Sai Chandan",
+    "alternateName": "Sai Chandan",
+    "url": "https://saichandan.vercel.app/",
+    "image": "https://saichandan.vercel.app/assets/images/chandan-800.jpg",
+    "jobTitle": "Associate Software Engineer",
+    "worksFor": { "@type": "Organization", "name": "Unisys" },
+    "email": "mailto:sanda.rsc@icloud.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Dayananda Sagar University" },
+      { "@type": "EducationalOrganization", "name": "Narayana Junior College, Kadapa" }
+    ],
+    "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "name": "Claude Certified Architect – Foundations", "credentialCategory": "certification", "validFor": "P16M", "dateCreated": "2026-04", "recognizedBy": { "@type": "Organization", "name": "Anthropic" } },
+      { "@type": "EducationalOccupationalCredential", "name": "Claude Certified Architect – Foundations Early Adopter", "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": "Anthropic" } }
+    ],
+    "knowsAbout": ["Anthropic Claude", "Claude Agent SDK", "React Native", "Expo", "Generative AI", "Large Language Models", "AI Agents", "Salesforce Agentforce", "Python", "TypeScript"],
+    "sameAs": [
+      "https://github.com/saichandan181",
+      "https://linkedin.com/in/reddy-sai-chandan-851102300",
+      "https://twitter.com/saichandan181",
+      "https://instagram.com/saichandan.sanda"
+    ]
+  }
+  </script>
+  <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
+  <!-- Icon sprite (every use is aria-hidden) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 20V4M6 10l6-6 6 6"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M6 14l6 6 6-6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 8h18M3 16h18"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8V4Z"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37ZM17.5 6.5h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path class="fill" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></symbol>
+  </svg>
 
-<header id="header" class="header">
-<div class="container">
-<nav class="nav">
-<a href="#" class="nav__brand">@SAICHANDAN</i></a>
-<div class="nav__menu" id="nav-menu">
-<ul class="nav__list">
-<li class="nav__item"><a href="#about"    class="nav__link">ABOUT ME</a></li>
-<!-- <li class="nav__item"><a href="#service"  class="nav__link">SERVICES</a></li> -->
-<li class="nav__item"><a href="#projects" class="nav__link">PROJECTS</a></li>
-<li class="nav__item"><a href="#blogs"    class="nav__link">BLOG</a></li>
-<li class="nav__item"><a href="#contact"  class="nav__link">CONTACT ME </a></li>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-<!-- PLAY AUDIO -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#main" class="brand" aria-label="Sai Chandan — back to top">
+        <span class="brand-mark" aria-hidden="true">SC</span>
+        <span class="brand-name">Sai Chandan</span>
+      </a>
 
-<audio loop="" id="audioPlayer" style="display:none" autoplay muted>
-    <source src="./assets/audio/audio.mp3.crdownload" type="audio/mp3">
-</audio>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#now">Now</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <span class="nav-indicator" aria-hidden="true"></span>
+      </nav>
 
-<i id="playPauseIcon" class="fas fa-volume-mute" onclick="togglePlayPause()"></i>
+      <div class="header-actions">
+        <button type="button" class="palette-trigger" data-open-palette aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <span class="palette-trigger-label">Search</span>
+          <kbd class="kbd" data-mod-key aria-hidden="true">Ctrl K</kbd>
+        </button>
+        <button type="button" class="icon-btn theme-btn" id="theme-toggle" aria-label="Switch to dark theme">
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <button type="button" class="icon-btn menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<script>
-    var audio = document.getElementById("audioPlayer");
-    var playPauseIcon = document.getElementById("playPauseIcon");
+  <main id="main" tabindex="-1">
 
-    function togglePlayPause() {
-        if (audio.paused) {
-            audio.play();
-            audio.muted = false; // Unmute when playing
-            playPauseIcon.className = "fas fa-volume-up"; // Change to volume up icon when playing
-        } else {
-            audio.pause();
-            audio.muted = true; // Mute when paused
-            playPauseIcon.className = "fas fa-volume-mute"; // Change to volume mute icon when paused
-        }
-    }
-</script>
+    <!-- ================= HERO ================= -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner" data-hero>
+        <dl class="hero-meta">
+          <div><dt>Currently</dt><dd>Associate Software Engineer<br />at Unisys</dd></div>
+          <div><dt>Based in</dt><dd>Bengaluru, India<br /><time class="tnum" data-clock>IST</time></dd></div>
+          <div><dt>Focus</dt><dd>Mobile · GenAI · Agents<br />Salesforce</dd></div>
+          <div><dt>Status</dt><dd><span class="status-dot" aria-hidden="true"></span>Open to collaborations</dd></div>
+        </dl>
 
-<!-- 
-<button onclick="togglePlayPause()">
-    <i id="playPauseIcon" class="fas fa-volume-up"></i>
-</button>
+        <h1 id="hero-title" class="hero-name" data-split-letters>Sai Chandan</h1>
 
-<script>
-    var audio = document.getElementById("myAudio");
-    var playPauseIcon = document.getElementById("playPauseIcon");
+        <div class="hero-body">
+          <div class="hero-copy">
+            <p class="hero-statement">
+              I build mobile apps and <em>AI agents</em> that do the boring part — so people don’t have to.
+            </p>
+            <p class="hero-lede">
+              Associate Software Engineer at Unisys and a Claude Certified Architect. I ship cross-platform apps
+              with React&nbsp;Native&nbsp;+&nbsp;Expo, build generative-AI products, and wire autonomous agents
+              into platforms like Salesforce.
+            </p>
+            <div class="hero-ctas">
+              <a class="btn btn-primary" href="#work" data-magnetic>
+                <span class="roll">See selected work</span>
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+              </a>
+              <a class="btn btn-outline" href="assets/images/Sanda%20Reddy%20Sai%20Chandan-Eng21am0108.pdf" download="Sai-Chandan-Resume.pdf" data-magnetic>
+                <span class="roll">Download résumé</span>
+                <span class="sr-only">(PDF)</span>
+              </a>
+            </div>
+          </div>
 
-    function togglePlayPause() {
-        if (audio.paused) {
-            audio.play();
-            playPauseIcon.className = "fas fa-volume-mute"; // Change to mute icon when playing
-        } else {
-            audio.pause();
-            playPauseIcon.className = "fas fa-volume-up"; // Change to speaker icon when paused
-        }
-    }
-</script>
--->
+          <figure class="hero-portrait" data-tilt>
+            <div class="portrait-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/images/chandan-480.webp 480w, assets/images/chandan-800.webp 800w" sizes="(min-width: 960px) 380px, 80vw" />
+                <img src="assets/images/chandan-800.jpg" width="800" height="1000" alt="Sai Chandan smiling in an orange life jacket on a woven coracle boat beside a fluffy husky, with rocky cliffs and a river behind them." fetchpriority="high" decoding="async" />
+              </picture>
+              <span class="portrait-glare" aria-hidden="true"></span>
+            </div>
+            <figcaption><span>Fig. 01</span> Off the keyboard, with the best co-pilot.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-</ul>
-</div>
-<div class="nav__toggle">
-<i id="nav-toggle" class="ri-menu-3-line"></i>
-</div>
-</nav>
-</div>
-</header>
-
-<main class="main">
-<section id="hero" class="hero">
-<div class="container">
-<div class="d-grid hero__wrapper">
-<div class="hero__content">
-   
-<h1 class="hero__title">Welcome to my portfolio! I’m Sanda Reddy Sai Chandan, a driven student at Dayananda Sagar University, where I’m shaping my journey in CSE <BR>AI & ML💻;</h1>
-</div>
-<img src="./assets/images/main.jpg" alt="@SAICHANDAN" class="hero__img"/>
-</div>
-</div>
-</section>
-
-<!-- About  -->
-
-<section id="about" class="section about">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">ABOUT ME</h2>
-<span class="section__subtitle">WHO AM I</span>
-</div>
-<div class="d-grid about__wrapper">
-<div class="about__content">
-<h3 class="about__title">I'M A Computer Science Engineer</h3>
-<p class="about__description">
-    Hi Everyone, I am Sai Chandan from Bangalore, India. Currently, I am pursuing a bachelor's in Computer Science with a focus on AI and ML at DSU
-</p>
-<a href="./assets/images/Reddy Sai Chandna Sanda.pdf" class="btn btn--primary">Explore My Resume</a>
-</div>
-
-
-<div class="skills">
-<h3 class="skills__title">My Technical Skills</h3>
-<div class="skills__wrapper">
-<div class="skills__content">
-
-<ul class="skills__list">
-
-<!-- <li class="skills__item">
-<i class=""></i> □ Java
-</li> -->
-<!-- <li class="skills__item">
-<i class=""></i> □ C
- </li> -->
-<li class="skills__item">
-<i class=""></i> □ HTML
-</li>
-<li class="skills__item">
-<i class=""></i> □ CSS
-</li>
-<li class="skills__item">
-<i class=""></i> □ JS
-</li>
-<li class="skills__item">
-    <i class=""></i> □ SQL
-    </li>
- <li class="skills__item">
-<i class=""></i> □ PYTHON
-</li>
-<li class="skills__item">
-    <i class=""></i> □ JAVA
-    </li>
-
-<!-- <li class="skills__item">
-<i class=""></i> □ Power BI
-</li>
-<li class="skills__item">
-<i class=""></i> □ Tableau
-</li> --> 
-
-</ul>
-</div>
-<div class="skills__content">
-<ul class="skills__list">
-<li class="skills__item">
-<i class=""></i> □ Pandas
-</li>
-<li class="skills__item">
-<i class=""></i> □ NumPy
-</li>
-<li class="skills__item">
-<i class=""></i> □ Matplotlib
-</li>
-<li class="skills__item">
-<i class=""></i> □ Seaborn
-</li>
-<li class="skills__item">
-<i class=""></i> □ Scikit-learn
-</li>
-<li class="skills__item">
-<i class=""></i> □ Tensorflow
-</li>
-<li class="skills__item">
-<i class=""></i> □ Keras
-</li>
-<li class="skills__item">
-<i class=""></i> □ Pytorch
-</li>
-<!-- <li class="skills__item">
-<i class=""></i> □ Looker
-</li>
-<li class="skills__item">
-<i class=""></i> □ Netron
-</li> -->
-
-</ul>
-</div>
-</div>
-</div>
-
-</section>
-
-<!-- services  -->
-<!-- <section id="service" class="section service">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">SERVICES</h2>
-<span class="section__subtitle">HOW CAN I HELP</span>
-</div>
-<div class="d-grid service__wrapper">
-
-<!-- service card 1 -->
-<!-- <div class="service__card">
-<div class="service__icon">
-</div>
-<h3 class="service__title">MACHINE LEARNING<br/>
-</h3>
-</div>
-
-<div class="service__card">
-<div class="service__icon">
-</div>
-<h3 class="service__title">DATA SCIENCE</h3>
-</div>
-
-<div class="service__card">
-<div class="service__icon">
-</div>
-<h3 class="service__title">CONTENT CREATION</h3>
-</div>
-</div>
-</div>
-</section> --> 
-
-<!-- Projects -->
-<section id="projects" class="section project">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">Projects</h2>
-<span class="section__subtitle">My recent work</span>
-
-</div>
-<div class="d-grid project__wrapper">
-
-    <!-- pr#1 -->
-<div class="project__content">
-    <img src="assets/images/ezgif.com-animated-gif-maker.gif" alt="project(1)" class="project__img"/>
-    <h3 class="project__title">AI Hub</h3>
-    <p class="project__description">where you can find any AI tools you need, from productivity to creativity. This is the concept behind a website that houses a collection of AI tools. Such a platform aims to streamline various tasks and provide users with a convenient, one-stop solution for their diverse needs.With help of Generative AI model. I have developed this.✨</p>
-    <a href="#" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-    <a href="https://aihubtool.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
+    <!-- ================= SCROLL-LINKED STRIP ================= -->
+    <div class="strip" aria-hidden="true">
+      <div class="strip-row" data-strip="-1">
+        <span>Mobile apps</span><span class="o">Generative AI</span><span>Autonomous agents</span><span class="o">Salesforce</span><span>Full-stack</span><span class="o">Mobile apps</span><span>Generative AI</span><span class="o">Autonomous agents</span><span>Salesforce</span><span class="o">Full-stack</span>
+      </div>
+      <div class="strip-row strip-row--small" data-strip="1">
+        <span>React Native</span><span>Expo</span><span>TypeScript</span><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>Gemini</span><span>Claude Agent SDK</span><span>MCP</span><span>Agentforce</span><span>Apex</span><span>Next.js</span><span>FastAPI</span><span>Supabase</span><span>Docker</span><span>AWS</span><span>React Native</span><span>Expo</span><span>TypeScript</span><span>Python</span>
+      </div>
     </div>
 
-<!-- pr#1 -->
-<div class="project__content">
-<img src="https://chandan-gpt.vercel.app/_img/Gemini_language_model_logo%20(1).png" alt="project(1)" class="project__img"/>
-<h3 class="project__title">CHANDAN-GPT</h3>
-<p class="project__description">ChandanGPT is a personality AI chatbot trained on a massive dataset of text and code, with a focus on conversational skills and a wide range of knowledge. I have been fine-tuned by Chandan to be informative, comprehensive, engaging, and creative. My purpose is to assist users with a variety of writing tasks, including generating text, answering questions, and providing information.✨</p>
-<a href="https://github.com/saichandan181/ChandanGPT" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-<a href="https://chandan-gpt.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
-</div>
+    <!-- ================= ABOUT ================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container split">
+        <div class="split-side"><div class="split-side-inner">
+          <p class="section-index"><span aria-hidden="true">(01)</span> About</p>
+          <h2 id="about-title" class="section-title" data-split-words>Engineer by training, <em>automator</em> by instinct.</h2>
+        </div></div>
 
-<!-- pr#2 -->
-<div class="project__content">
-<img src="assets/images/Screenshot (39).png" alt="project(2)" class="project__img"/>
-<h3 class="project__title">GEMINI-VISION-PRO</h3>
-<p class="project__description">Gemini Pro Vision is a Gemini large language vision model that understands input from text and visual modalities (image and video) in addition to text to generate relevant text responses.
+        <div class="split-main">
+          <p class="about-lead" data-highlight>
+            I’m Sanda Reddy Sai Chandan, an Associate Software Engineer at Unisys in Bengaluru with a degree
+            in computer science, specialising in AI and ML. I ship cross-platform mobile apps with React Native and Expo, build generative-AI products on
+            multimodal models, and design multi-agent systems that plan, act and verify their own work.
+            I also engineer on Salesforce — Agentforce, Apex and Flow — without blowing up governor limits.
+          </p>
 
-    Gemini Pro Vision is a foundation model that performs well at a variety of multimodal tasks such as visual understanding, classification, summarization, and creating content from image and video🚀🧬✨</p>
-<a href="https://github.com/saichandan181/Gemini-Vision-pro" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-<a href="https://gemini-vision-pro.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
-</div>
+          <blockquote class="philosophy reveal">
+            <p>“If I do it twice, an agent should do it the third time.”</p>
+            <footer>— my engineering philosophy</footer>
+          </blockquote>
 
-<!-- pr#3 -->
-<div class="project__content">
-<img src="https://currency-convertorr.vercel.app/img/money.png" alt="project(3)" class="project__img"/>
-<h3 class="project__title">CURRENCY CONVERTOR</h3>
-<p class="project__description">A currency converter web application that converts and calculates currency exchange rates using an API 📑✨</p>
-<a href="https://github.com/saichandan181/currency-convertorr" class="project__link">Source Code <i class="ri-arrow-right-line"></i></a>
-<a href="https://currency-convertorr.vercel.app/" class="project__link">Demo <i class="ri-arrow-right-line"></i></a>
-</div>
-</div>
-</div>
-</section>
+          <dl class="facts">
+            <div class="fact reveal">
+              <dt>Off the keyboard</dt>
+              <dd>Badminton, cricket, travel and very good dogs.</dd>
+            </div>
+            <div class="fact reveal">
+              <dt>Fun fact</dt>
+              <dd>
+                I think I am funny.
+                <button type="button" class="text-btn" id="joke-btn">Prove it</button>
+                <span class="joke-out" id="joke-out" aria-live="polite"></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
 
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="section section--alt" id="experience" aria-labelledby="experience-title">
+      <div class="container split">
+        <div class="split-side"><div class="split-side-inner">
+          <p class="section-index"><span aria-hidden="true">(02)</span> Experience</p>
+          <h2 id="experience-title" class="section-title" data-split-words>From intern to <em>engineer.</em></h2>
+          <p class="side-note reveal"><span data-tenure data-since="2024-10">2 yrs 1 mo</span> at Unisys — joined as a student technical intern, stayed on full-time.</p>
+        </div></div>
 
+        <div class="split-main">
+          <div class="xp-group">
+            <header class="xp-head reveal">
+              <h3>Unisys</h3>
+              <p>Bengaluru, Karnataka, India · <span data-tenure data-since="2024-10">2 yrs 1 mo</span></p>
+            </header>
+            <ol class="timeline" role="list" data-timeline>
+              <li class="role is-current reveal">
+                <span class="role-dot" aria-hidden="true"></span>
+                <p class="role-when"><time datetime="2025-08">Aug 2025</time> – Present<br /><span data-tenure data-since="2025-08">1 yr 3 mos</span></p>
+                <div class="role-body">
+                  <h4>Associate Software Engineer <span class="pill">Current</span></h4>
+                  <ul class="role-tags" role="list"><li>Full-time</li><li>Hybrid</li></ul>
+                </div>
+              </li>
+              <li class="role reveal">
+                <span class="role-dot" aria-hidden="true"></span>
+                <p class="role-when"><time datetime="2024-10">Oct 2024</time> – <time datetime="2025-08">Aug 2025</time><br /><span>11 mos</span></p>
+                <div class="role-body">
+                  <h4>Student Technical Intern</h4>
+                  <p>Cloud Application &amp; Infrastructure team — my first hands-on experience with enterprise cloud technologies.</p>
+                  <ul class="role-tags" role="list"><li>Internship</li><li>On-site</li></ul>
+                </div>
+              </li>
+            </ol>
+          </div>
 
-<!-- blog -->
-<!-- <section id="blogs" class="section project">
-<div class="container">
-<div class="section__header">
-<h2 class="section__title">BLOG</h2>
-<span class="section__subtitle">My recent posts</span> -->
+          <div class="xp-group">
+            <header class="xp-head reveal"><h3>Education</h3></header>
+            <ol class="timeline" role="list" data-timeline>
+              <li class="role reveal">
+                <span class="role-dot" aria-hidden="true"></span>
+                <p class="role-when"><time datetime="2021">2021</time> – <time datetime="2025">2025</time></p>
+                <div class="role-body">
+                  <h4>Dayananda Sagar University</h4>
+                  <p>B.E. Computer Science &amp; Engineering — Artificial Intelligence &amp; Machine Learning. Graduated 2025.</p>
+                </div>
+              </li>
+              <li class="role reveal">
+                <span class="role-dot" aria-hidden="true"></span>
+                <p class="role-when"><time datetime="2019-06">Jun 2019</time> – <time datetime="2021-05">May 2021</time></p>
+                <div class="role-body">
+                  <h4>Narayana Junior College, Kadapa</h4>
+                  <p>Intermediate — Mathematics, Physics &amp; Chemistry (MPC).</p>
+                </div>
+              </li>
+            </ol>
+          </div>
 
-<!-- </div>
-<div class="d-grid project__wrapper"> -->
+          <div class="xp-group">
+            <header class="xp-head reveal"><h3>Certifications</h3></header>
+            <ul class="certs" role="list">
+              <li class="cert cert--feature reveal" data-tilt>
+                <p class="cert-issuer">Anthropic · Apr 2026 · valid until Aug 2027</p>
+                <h4>Claude Certified Architect — Foundations</h4>
+                <p class="cert-id">Credential ID <span class="tnum">yrxyomizi79c</span></p>
+              </li>
+              <li class="cert cert--feature reveal" data-tilt>
+                <p class="cert-issuer">Anthropic · Apr 2026</p>
+                <h4>Claude Certified Architect — Foundations <em>Early Adopter</em></h4>
+                <p class="cert-id">Credential ID <span class="tnum">5xfrktd7ftnk</span></p>
+              </li>
+              <li class="cert reveal"><p class="cert-issuer">ServiceNow</p><h4>Certified System Administrator</h4></li>
+              <li class="cert reveal"><p class="cert-issuer">HackerRank</p><h4>JavaScript</h4></li>
+              <li class="cert reveal"><p class="cert-issuer">Great Learning</p><h4>Machine Learning with Python</h4></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- pr#1 -->
-<!-- <div class="project__content">
-<img src="./assets/images/blog-banner.png" alt="project(1)" class="project__img"/>
-<h3 class="project__title">BLOG #1</h3>
-<p class="project__description">##########</p>
-<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
-</div> -->
+    <!-- ================= EXPERTISE ================= -->
+    <section class="section" id="expertise" aria-labelledby="expertise-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="section-index"><span aria-hidden="true">(03)</span> Expertise</p>
+          <h2 id="expertise-title" class="section-title" data-split-words>Four things I do <em>well.</em></h2>
+        </header>
 
-<!-- pr#2 -->
-<!-- <div class="project__content">
-<img src="./assets/images/blog-banner.png" alt="project(2)" class="project__img"/>
-<h3 class="project__title">BLOG #2</h3>
-<p class="project__description">##########</p>
-<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
-</div> -->
+        <ol class="expertise" role="list">
+          <li class="exp-card" data-rise>
+            <article data-tilt>
+              <p class="exp-num" aria-hidden="true">01</p>
+              <h3>Mobile</h3>
+              <p>Cross-platform iOS and Android apps with React Native and Expo — EAS builds, OTA updates, and config plugins when a native module fights back.</p>
+              <ul role="list" class="tools"><li>React Native</li><li>Expo</li><li>Expo Router</li><li>EAS Build</li></ul>
+            </article>
+          </li>
+          <li class="exp-card" data-rise>
+            <article data-tilt>
+              <p class="exp-num" aria-hidden="true">02</p>
+              <h3>AI &amp; Agents</h3>
+              <p>Generative-AI products, LLM apps and multi-agent pipelines — planner, worker and verifier loops with real evaluation harnesses.</p>
+              <ul role="list" class="tools"><li>PyTorch</li><li>TensorFlow</li><li>scikit-learn</li><li>OpenCV</li><li>Claude Agent SDK</li><li>Gemini</li><li>MCP</li></ul>
+            </article>
+          </li>
+          <li class="exp-card" data-rise>
+            <article data-tilt>
+              <p class="exp-num" aria-hidden="true">03</p>
+              <h3>Salesforce</h3>
+              <p>Platform engineering with Agentforce, Apex, Flow and the Tooling API — putting AI agents inside the CRM, safely and within limits.</p>
+              <ul role="list" class="tools"><li>Agentforce</li><li>Apex</li><li>Flow</li><li>Tooling API</li></ul>
+            </article>
+          </li>
+          <li class="exp-card" data-rise>
+            <article data-tilt>
+              <p class="exp-num" aria-hidden="true">04</p>
+              <h3>Full-stack</h3>
+              <p>Web apps and the APIs behind them, from React front-ends to Python and Node services and the databases underneath.</p>
+              <ul role="list" class="tools"><li>React</li><li>Next.js</li><li>Tailwind</li><li>Node.js</li><li>FastAPI</li><li>Django</li><li>PostgreSQL</li><li>MongoDB</li><li>Supabase</li></ul>
+            </article>
+          </li>
+        </ol>
 
-<!-- pr#3 -->
-<!-- <div class="project__content">
-<img src="./assets/images/blog-banner.png" alt="project(3)" class="project__img"/>
-<h3 class="project__title">BLOG #3</h3>
-<p class="project__description">##########</p>
-<a href="#" class="project__link">Read More <i class="ri-arrow-right-line"></i></a>
-</div>
-</div>
-</div> -->
-<!-- </section> -->
+        <p class="also reveal">
+          <span>Also fluent in</span> Python, TypeScript, JavaScript, Java, C, SQL, HTML &amp; CSS ·
+          AWS, Vercel, Heroku, Docker, Podman, GitHub Actions, Git.
+        </p>
+      </div>
+    </section>
 
+    <!-- ================= WORK ================= -->
+    <section class="section section--alt" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <header class="section-head section-head--row">
+          <div>
+            <p class="section-index"><span aria-hidden="true">(04)</span> Selected work</p>
+            <h2 id="work-title" class="section-title" data-split-words>Agents, AI apps and the <em>APIs</em> behind them.</h2>
+          </div>
+          <a class="link-underline reveal" href="https://github.com/saichandan181?tab=repositories" target="_blank" rel="noopener noreferrer">
+            All repositories <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only">on GitHub (opens in new tab)</span>
+          </a>
+        </header>
 
+        <ol class="work-stack" role="list">
+          <li class="work-item" data-repo="polyagent" style="--i:0">
+            <article class="work-card" aria-labelledby="p1">
+              <div class="work-text">
+                <p class="work-meta"><span aria-hidden="true">01</span><span data-lang>TypeScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p1">polyagent</h3>
+                <p>A multi-tenant trading agent for Polymarket. Every tenant gets isolated strategy execution — its own sandbox, its own rules — so one bad strategy can never touch another.</p>
+                <ul class="tags" role="list"><li>AI agents</li><li>Multi-tenant</li><li>Sandboxing</li></ul>
+                <div class="work-links">
+                  <a class="link-underline" href="https://github.com/saichandan181/polyagent" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source<span class="sr-only"> code for polyagent (opens in new tab)</span></a>
+                </div>
+              </div>
+              <div class="work-visual" data-tone="1" aria-hidden="true">
+                <svg viewBox="0 0 400 300" class="art">
+                  <g class="art-lines"><path d="M80 80 200 150 320 70M200 150 120 230M200 150 300 220M80 80 120 230M320 70 300 220"/></g>
+                  <circle cx="200" cy="150" r="22" class="art-solid"/><circle cx="80" cy="80" r="12"/><circle cx="320" cy="70" r="12"/><circle cx="120" cy="230" r="12"/><circle cx="300" cy="220" r="12"/>
+                  <circle cx="200" cy="150" r="48" class="art-ring"/>
+                </svg>
+              </div>
+            </article>
+          </li>
 
+          <li class="work-item" data-repo="Gemini-Vision-pro" style="--i:1">
+            <article class="work-card" aria-labelledby="p2">
+              <div class="work-text">
+                <p class="work-meta"><span aria-hidden="true">02</span><span data-lang>Python</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p2">Gemini Vision Pro</h3>
+                <p>Multimodal object recognition on Gemini Pro Vision. Point a camera or upload an image, ask a question in plain language, and get a reasoned description of what it sees.</p>
+                <ul class="tags" role="list"><li>Generative AI</li><li>Multimodal</li><li>Gemini</li></ul>
+                <div class="work-links">
+                  <a class="link-underline" href="https://gemini-vision-pro.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span class="sr-only"> of Gemini Vision Pro (opens in new tab)</span></a>
+                  <a class="link-underline" href="https://github.com/saichandan181/Gemini-Vision-pro" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source<span class="sr-only"> code for Gemini Vision Pro (opens in new tab)</span></a>
+                </div>
+              </div>
+              <div class="work-visual" data-tone="2" aria-hidden="true">
+                <svg viewBox="0 0 400 300" class="art">
+                  <circle cx="200" cy="150" r="110" class="art-ring"/><circle cx="200" cy="150" r="80"/><circle cx="200" cy="150" r="50"/><circle cx="200" cy="150" r="22" class="art-solid"/>
+                  <path class="art-lines" d="M40 150h50M310 150h50M200 20v40M200 240v40"/>
+                </svg>
+              </div>
+            </article>
+          </li>
 
-<!--Contact -->
-<section id="contact" class="section contact">
-<div class="container">
-<div class="contact__wrapper">
-<div class="contact__content">
-<h2 class="contact__title">
-Interested in working together? Let's talk
-</h2>
-</div>
-<div class="contact__btn">
-<a href="mailto:sanda.rsc@icloud.com" target="_blank" class="btn btn--secondary">Get in touch</a>
-</div>
-</div>
-</div>
+          <li class="work-item" data-repo="testvibe-pos" style="--i:2">
+            <article class="work-card" aria-labelledby="p3">
+              <div class="work-text">
+                <p class="work-meta"><span aria-hidden="true">03</span><span data-lang>TypeScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p3">testvibe-pos</h3>
+                <p>AI-assisted test generation and execution for point-of-sale workflows — getting an LLM to write tests that don’t just assert <code>true === true</code>.</p>
+                <ul class="tags" role="list"><li>LLM testing</li><li>Evals</li><li>TypeScript</li></ul>
+                <div class="work-links">
+                  <a class="link-underline" href="https://github.com/saichandan181/testvibe-pos" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source<span class="sr-only"> code for testvibe-pos (opens in new tab)</span></a>
+                </div>
+              </div>
+              <div class="work-visual" data-tone="3" aria-hidden="true">
+                <svg viewBox="0 0 400 300" class="art">
+                  <g class="art-lines"><path d="M150 70h170M150 120h130M150 170h150M150 220h110"/></g>
+                  <path class="art-check" d="M80 70l10 10 20-20M80 120l10 10 20-20M80 170l10 10 20-20"/>
+                  <rect x="78" y="208" width="26" height="26" rx="4"/>
+                </svg>
+              </div>
+            </article>
+          </li>
 
-</section>
-</main>
+          <li class="work-item" data-repo="backendapi-pos" style="--i:3">
+            <article class="work-card" aria-labelledby="p4">
+              <div class="work-text">
+                <p class="work-meta"><span aria-hidden="true">04</span><span data-lang>Python</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p4">backendapi-pos</h3>
+                <p>The Python API layer powering the POS platform — FastAPI services that the web app and the test-generation surface are built on.</p>
+                <ul class="tags" role="list"><li>FastAPI</li><li>REST</li><li>Python</li></ul>
+                <div class="work-links">
+                  <a class="link-underline" href="https://github.com/saichandan181/backendapi-pos" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source<span class="sr-only"> code for backendapi-pos (opens in new tab)</span></a>
+                </div>
+              </div>
+              <div class="work-visual" data-tone="4" aria-hidden="true">
+                <svg viewBox="0 0 400 300" class="art">
+                  <path d="M200 60 320 110 200 160 80 110Z" class="art-solid-soft"/>
+                  <path d="M80 150l120 50 120-50M80 190l120 50 120-50"/>
+                </svg>
+              </div>
+            </article>
+          </li>
 
-<footer id="footer" class="footer">
-<div class="container">
-<div class="d-grid footer__wrapper">
-<div class="footer__content">
-<h4 class="footer__title">Follow Me</h4>
-<ul class="footer__social-list">
-    <li class="footer__social-item">
-        <a href="https://www.instagram.com/saichandan.sanda" class="footer__social-link">
-    <i class="ri-instagram-fill"></i>
-</a>
-</li>
-<li class="footer__social-item">
-<a href="https://twitter.com/saichandan181" class="footer__social-link">
-<i class="ri-twitter-fill"></i>
-</a>
-</li>
+          <li class="work-item" data-repo="aiexpensetracker" style="--i:4">
+            <article class="work-card" aria-labelledby="p5">
+              <div class="work-text">
+                <p class="work-meta"><span aria-hidden="true">05</span><span data-lang>JavaScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p5">AI Expense Tracker</h3>
+                <p>Expense tracking that categorises spending with an LLM and turns raw transactions into plain-language insights.</p>
+                <ul class="tags" role="list"><li>LLM</li><li>Categorisation</li><li>Insights</li></ul>
+                <div class="work-links">
+                  <a class="link-underline" href="https://github.com/saichandan181/aiexpensetracker" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source<span class="sr-only"> code for AI Expense Tracker (opens in new tab)</span></a>
+                </div>
+              </div>
+              <div class="work-visual" data-tone="5" aria-hidden="true">
+                <svg viewBox="0 0 400 300" class="art">
+                  <path class="art-lines" d="M60 250h280"/>
+                  <rect x="90" y="170" width="36" height="80"/><rect x="150" y="120" width="36" height="130" class="art-solid"/><rect x="210" y="150" width="36" height="100"/><rect x="270" y="80" width="36" height="170"/>
+                  <path class="art-lines" d="M90 140 168 95 228 120 300 50"/>
+                </svg>
+              </div>
+            </article>
+          </li>
 
-<li class="footer__social-item">
-<a href="https://github.com/saichandan181/" class="footer__social-link">
-<i class="ri-github-fill"></i>
-</a>
-</li>
-</ul>
-</div>
-<div class="footer__content">
-<h4 class="footer__title">Email Me</h4>
-<a href="mailto:sanda.rsc@icloud.com" class="footer__contact">sanda.rsc@icloud.com</a>
-</div>
-</div>
-<p class="footer__copyright">Coded with Love ❤️ & Coffee ☕️</p>
-</div>
-</footer>
+          <li class="work-item" data-repo="onlyus" style="--i:5">
+            <article class="work-card" aria-labelledby="p6">
+              <div class="work-text">
+                <p class="work-meta"><span aria-hidden="true">06</span><span data-lang>TypeScript</span><span class="stars" data-stars hidden></span></p>
+                <h3 id="p6">onlyus</h3>
+                <p>A full-stack TypeScript side project — the playground where I try new patterns end to end before they reach client work.</p>
+                <ul class="tags" role="list"><li>Full-stack</li><li>TypeScript</li></ul>
+                <div class="work-links">
+                  <a class="link-underline" href="https://github.com/saichandan181/onlyus" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source<span class="sr-only"> code for onlyus (opens in new tab)</span></a>
+                </div>
+              </div>
+              <div class="work-visual" data-tone="6" aria-hidden="true">
+                <svg viewBox="0 0 400 300" class="art">
+                  <circle cx="160" cy="150" r="80"/><circle cx="240" cy="150" r="80" class="art-ring"/>
+                  <path d="M200 81a80 80 0 0 1 0 138 80 80 0 0 1 0-138Z" class="art-solid"/>
+                </svg>
+              </div>
+            </article>
+          </li>
+        </ol>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/scrollreveal"></script>
-<script src="./assets/js/main.js"></script>
+        <h3 class="earlier-title reveal">Earlier work</h3>
+        <ul class="earlier" role="list">
+          <li class="reveal" data-repo="ChandanGPT">
+            <a href="https://chandan-gpt.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <span class="earlier-name">ChandanGPT</span>
+              <span class="earlier-desc">Personality chatbot tuned to be informative, engaging and a little bit me.</span>
+              <span class="earlier-tag">Chatbot · LLM</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+              <span class="sr-only">(live demo, opens in new tab)</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a href="https://aihubtool.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <span class="earlier-name">AI Hub</span>
+              <span class="earlier-desc">A one-stop directory of AI tools, from productivity to creativity.</span>
+              <span class="earlier-tag">Directory · GenAI</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+              <span class="sr-only">(live demo, opens in new tab)</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a href="https://currency-convertorr.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <span class="earlier-name">Currency Converter</span>
+              <span class="earlier-desc">Real-time exchange rates across dozens of currencies via a live API.</span>
+              <span class="earlier-tag">REST API · JS</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+              <span class="sr-only">(live demo, opens in new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= NOW ================= -->
+    <section class="section" id="now" aria-labelledby="now-title">
+      <div class="container split">
+        <div class="split-side"><div class="split-side-inner">
+          <p class="section-index"><span aria-hidden="true">(05)</span> Now</p>
+          <h2 id="now-title" class="section-title" data-split-words>Currently <em>learning.</em></h2>
+        </div></div>
+
+        <div class="split-main">
+          <ol class="learning" role="list">
+            <li class="reveal"><span aria-hidden="true">01</span><div><h3>Multi-agent orchestration</h3><p>Planner → worker → verifier loops that check their own output.</p></div></li>
+            <li class="reveal"><span aria-hidden="true">02</span><div><h3>MCP server design</h3><p>Tool allowlisting and guardrails that enterprises can actually sign off on.</p></div></li>
+            <li class="reveal"><span aria-hidden="true">03</span><div><h3>Sandboxed agent execution</h3><p>Running agents safely inside rootless containers.</p></div></li>
+            <li class="reveal"><span aria-hidden="true">04</span><div><h3>Evaluating non-deterministic AI</h3><p>Evaluation harnesses for output that’s different every run.</p></div></li>
+            <li class="reveal"><span aria-hidden="true">05</span><div><h3>Domain-specific LLMs</h3><p>Fine-tuning and retrieval strategies that fit the domain.</p></div></li>
+          </ol>
+
+          <h3 class="ask-title reveal">Ask me about</h3>
+          <div class="ask reveal">
+            <details class="faq" name="ask"><summary>Picking the right language for the job</summary><div class="faq-body"><p>Python, JavaScript/TypeScript, Java, HTML/CSS — and where each one actually earns its keep.</p></div></details>
+            <details class="faq" name="ask"><summary>Building generative-AI apps on multimodal models</summary><div class="faq-body"><p>Prompting, grounding and UX patterns for apps that see, read and reason.</p></div></details>
+            <details class="faq" name="ask"><summary>Shipping React Native apps with Expo</summary><div class="faq-body"><p>EAS builds, OTA updates, and the config-plugin escape hatch when a native module fights back.</p></div></details>
+            <details class="faq" name="ask"><summary>Wiring AI agents into Salesforce</summary><div class="faq-body"><p>Agentforce, Apex and Flow — without blowing up governor limits.</p></div></details>
+            <details class="faq" name="ask"><summary>Getting LLMs to write useful tests</summary><div class="faq-body"><p>Tests that don’t just assert <code>true === true</code> — evals, fixtures and verification loops.</p></div></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section section--alt contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="section-index"><span aria-hidden="true">(06)</span> Contact</p>
+        <h2 id="contact-title" class="contact-title" data-zoom>Let’s build something <em>worth automating.</em></h2>
+
+        <div class="contact-grid">
+          <p class="contact-copy reveal">Open to collaborations, freelance work and interesting problems. Tell me what you’re building — I usually reply within a day.</p>
+
+          <a class="contact-orb" href="mailto:sanda.rsc@icloud.com" data-magnetic>
+            <span class="orb-label">Say<br />hello</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+            <span class="sr-only">— email sanda.rsc@icloud.com</span>
+          </a>
+        </div>
+
+        <div class="contact-row reveal">
+          <a class="contact-email link-underline" href="mailto:sanda.rsc@icloud.com">sanda.rsc@icloud.com</a>
+          <button type="button" class="btn btn-outline btn-small" data-copy-email>
+            <svg class="icon" aria-hidden="true"><use href="#i-copy" data-copy-icon/></svg>
+            <span data-copy-label>Copy email</span>
+          </button>
+        </div>
+
+        <ul class="socials reveal" role="list">
+          <li><a class="link-underline" href="https://github.com/saichandan181" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a class="link-underline" href="https://linkedin.com/in/reddy-sai-chandan-851102300" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a class="link-underline" href="https://twitter.com/saichandan181" target="_blank" rel="noopener noreferrer">X / Twitter<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a class="link-underline" href="https://instagram.com/saichandan.sanda" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a></li>
+          <li><a class="link-underline" href="https://www.buymeacoffee.com/saichandan" target="_blank" rel="noopener noreferrer">Buy me a coffee<span class="sr-only"> (opens in new tab)</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Sanda Reddy Sai Chandan</p>
+      <p class="footer-time">Bengaluru <time class="tnum" data-clock>IST</time></p>
+      <div class="footer-actions">
+        <button type="button" class="text-btn" id="motion-toggle" aria-pressed="false">
+          <svg class="icon icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+          <svg class="icon icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+          <span data-motion-label>Reduce motion</span>
+        </button>
+        <a href="#top" class="text-btn">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg> Back to top
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= COMMAND PALETTE ================= -->
+  <dialog class="palette" id="palette" aria-labelledby="palette-title">
+    <div class="palette-inner">
+      <h2 id="palette-title" class="sr-only">Search the site</h2>
+      <div class="palette-search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="palette-input" type="text" role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" aria-label="Search sections, projects and actions" placeholder="Search sections, projects, actions…" autocomplete="off" spellcheck="false" />
+        <button type="button" class="kbd kbd-btn" data-close-palette aria-label="Close search">Esc</button>
+      </div>
+      <ul id="palette-list" class="palette-list" role="listbox" aria-label="Results"></ul>
+      <p class="palette-foot" aria-hidden="true"><span><kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> move</span><span><kbd class="kbd">↵</kbd> select</span><span><kbd class="kbd">Esc</kbd> close</span></p>
+      <p class="sr-only" id="palette-status" role="status"></p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
-
 </html>

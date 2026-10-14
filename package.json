@@ -1,0 +1,9 @@
+{
+  "name": "chandan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio site — plain HTML, CSS and JS, no build step.",
+  "engines": {
+    "node": "24.x"
+  }
+}
