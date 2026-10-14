@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f2027"/><stop offset="1" stop-color="#2c5364"/></linearGradient></defs>
-  <rect width="64" height="64" rx="16" fill="url(#g)"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#36bcf7" stroke-opacity=".45" stroke-width="3"/>
-  <text x="32" y="42" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="28" font-weight="700" fill="#36bcf7">sc</text>
+  <circle cx="32" cy="32" r="32" fill="#141413"/>
+  <circle cx="50" cy="14" r="6" fill="#2a3fe5"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Inter Tight, Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="-1" fill="#f3f1ec">SC</text>
 </svg>

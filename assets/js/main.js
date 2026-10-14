@@ -1,7 +1,7 @@
 /* =========================================================
    Sai Chandan — portfolio interactions
-   Everything here is progressive enhancement: the page is
-   fully readable and navigable with JavaScript turned off.
+   Progressive enhancement only: with JavaScript off (or with
+   reduced motion) every word of content is still there.
    ========================================================= */
 (() => {
   "use strict";
@@ -9,6 +9,8 @@
   const root = document.documentElement;
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   const EMAIL = "sanda.rsc@icloud.com";
   const RESUME = "assets/images/Sanda%20Reddy%20Sai%20Chandan-Eng21am0108.pdf";
@@ -25,8 +27,11 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch { /* private mode */ } },
   };
 
-  /* ---------- Motion preference ---------- */
+  /* =======================================================
+     Motion preference (OS setting + in-page toggle)
+     ======================================================= */
   const osReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   const motionOK = () => {
     const pref = root.getAttribute("data-motion");
     if (pref === "reduced") return false;
@@ -34,29 +39,35 @@
     return !osReduced.matches;
   };
   const motionListeners = new Set();
-  const onMotionChange = (fn) => motionListeners.add(fn);
-  const emitMotion = () => motionListeners.forEach((fn) => fn(motionOK()));
-  osReduced.addEventListener?.("change", emitMotion);
+  const applyMotion = () => {
+    const on = motionOK();
+    root.classList.toggle("motion-ok", on);
+    motionListeners.forEach((fn) => fn(on));
+  };
+  root.classList.toggle("motion-ok", motionOK());
+  osReduced.addEventListener?.("change", applyMotion);
 
   const motionBtn = $("#motion-toggle");
   const syncMotionBtn = () => {
     if (!motionBtn) return;
-    const paused = !motionOK();
-    motionBtn.setAttribute("aria-pressed", String(paused));
-    $("[data-motion-label]", motionBtn).textContent = paused ? "Play animations" : "Pause animations";
+    const reduced = !motionOK();
+    motionBtn.setAttribute("aria-pressed", String(reduced));
+    $("[data-motion-label]", motionBtn).textContent = reduced ? "Motion reduced" : "Reduce motion";
   };
   const toggleMotion = () => {
     const next = motionOK() ? "reduced" : "full";
     root.setAttribute("data-motion", next);
     store.set("motion", next);
+    applyMotion();
     syncMotionBtn();
-    emitMotion();
-    toast(next === "reduced" ? "Animations paused" : "Animations playing");
+    toast(next === "reduced" ? "Motion reduced" : "Full motion on");
   };
   motionBtn?.addEventListener("click", toggleMotion);
   syncMotionBtn();
 
-  /* ---------- Toast ---------- */
+  /* =======================================================
+     Toast
+     ======================================================= */
   const toastEl = $("#toast");
   let toastTimer;
   function toast(msg) {
@@ -66,76 +77,169 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toastEl.classList.remove("is-visible");
-      setTimeout(() => { toastEl.textContent = ""; }, 400);
+      setTimeout(() => { toastEl.textContent = ""; }, 500);
     }, 2600);
   }
 
-  /* ---------- Theme ---------- */
+  /* =======================================================
+     Theme — circular reveal via the View Transitions API
+     ======================================================= */
   const themeBtn = $("#theme-toggle");
-  const osLight = window.matchMedia("(prefers-color-scheme: light)");
-  const currentTheme = () => root.getAttribute("data-theme") || (osLight.matches ? "light" : "dark");
+  const osDark = window.matchMedia("(prefers-color-scheme: dark)");
+  const currentTheme = () => root.getAttribute("data-theme") || (osDark.matches ? "dark" : "light");
   const syncThemeBtn = () => {
     const t = currentTheme();
     themeBtn?.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
-    $$('meta[name="theme-color"]').forEach((m) => {
-      m.setAttribute("content", t === "dark" ? "#070b10" : "#f5f8fa");
-    });
+    $$('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", t === "dark" ? "#0e0e0d" : "#f3f1ec"));
   };
-  const toggleTheme = () => {
+  const toggleTheme = (origin) => {
     const next = currentTheme() === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    store.set("theme", next);
-    syncThemeBtn();
-    toast(`${next === "dark" ? "Dark" : "Light"} theme on`);
+    const apply = () => {
+      root.setAttribute("data-theme", next);
+      store.set("theme", next);
+      syncThemeBtn();
+    };
+    if (!document.startViewTransition || !motionOK()) { apply(); return; }
+    const r = (origin || themeBtn)?.getBoundingClientRect();
+    const x = r ? r.left + r.width / 2 : innerWidth / 2;
+    const y = r ? r.top + r.height / 2 : 0;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const vt = document.startViewTransition(apply);
+    vt.ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 700, easing: "cubic-bezier(0.22, 1, 0.36, 1)", pseudoElement: "::view-transition-new(root)" }
+      );
+    }).catch(() => {});
   };
-  themeBtn?.addEventListener("click", toggleTheme);
-  osLight.addEventListener?.("change", syncThemeBtn);
+  themeBtn?.addEventListener("click", () => toggleTheme(themeBtn));
+  osDark.addEventListener?.("change", syncThemeBtn);
   syncThemeBtn();
 
-  /* ---------- Header: scrolled state, progress bar, active link ---------- */
-  const header = $(".site-header");
-  const progress = $(".scroll-progress");
-  let ticking = false;
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      header?.classList.toggle("is-scrolled", y > 12);
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      progress?.style.setProperty("--progress", max > 0 ? (y / max).toFixed(4) : 0);
-      ticking = false;
-    });
+  /* =======================================================
+     Text splitting (visual copy is aria-hidden; the real
+     text stays available to assistive tech)
+     ======================================================= */
+  const srCopy = (el) => {
+    const sr = document.createElement("span");
+    sr.className = "sr-only";
+    sr.textContent = el.textContent.replace(/\s+/g, " ").trim();
+    return sr;
   };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
+  // Hero name → letters
+  $$("[data-split-letters]").forEach((el) => {
+    const text = el.textContent.trim();
+    const visual = document.createElement("span");
+    visual.setAttribute("aria-hidden", "true");
+    let li = 0;
+    for (const ch of text) {
+      if (ch === " ") { visual.insertAdjacentHTML("beforeend", '<span class="sp"></span>'); continue; }
+      visual.insertAdjacentHTML("beforeend", `<span class="ch"><span class="ch-i" style="--li:${li++}">${esc(ch)}</span></span>`);
+    }
+    const sr = srCopy(el);
+    el.textContent = "";
+    el.append(sr, visual);
+  });
+
+  // Section titles → words (keeps <em> styling)
+  $$("[data-split-words]").forEach((el) => {
+    const sr = srCopy(el);
+    const visual = el.cloneNode(true);
+    let wi = 0;
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(" "); return; }
+            const w = document.createElement("span");
+            w.className = "w";
+            w.innerHTML = `<span style="--wi:${wi++}">${esc(part)}</span>`;
+            frag.append(w);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          walk(child);
+        }
+      });
+    };
+    walk(visual);
+    const wrap = document.createElement("span");
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.append(...visual.childNodes);
+    el.textContent = "";
+    el.append(sr, wrap);
+  });
+
+  // About paragraph → words that light up as you read
+  const highlightEl = $("[data-highlight]");
+  let highlightWords = [];
+  if (highlightEl) {
+    const words = highlightEl.textContent.trim().split(/\s+/);
+    highlightEl.innerHTML = words.map((w) => `<span class="hw">${esc(w)}</span>`).join(" ");
+    highlightWords = $$(".hw", highlightEl);
+  }
+
+  // Button text roll: add an aria-hidden duplicate label
+  $$(".roll").forEach((el) => {
+    const t = el.textContent.trim();
+    el.innerHTML = `<span>${esc(t)}</span><span aria-hidden="true">${esc(t)}</span>`;
+  });
+
+  /* =======================================================
+     Header: scrolled state, hide-on-scroll, progress, spy
+     ======================================================= */
+  const header = $(".site-header");
+  const progressEl = $(".scroll-progress");
+  const nav = $("#site-nav");
   const navLinks = $$(".site-nav a");
+  const indicator = $(".nav-indicator");
+  let lastY = window.scrollY;
+
+  const moveIndicator = (link) => {
+    if (!indicator) return;
+    if (!link) { indicator.style.setProperty("--o", 0); return; }
+    indicator.style.setProperty("--x", `${link.offsetLeft}px`);
+    indicator.style.setProperty("--w", `${link.offsetWidth}px`);
+    indicator.style.setProperty("--o", 1);
+  };
+  const currentLink = () => navLinks.find((a) => a.getAttribute("aria-current") === "true");
+  navLinks.forEach((a) => {
+    a.addEventListener("pointerenter", () => moveIndicator(a));
+    a.addEventListener("focus", () => moveIndicator(a));
+  });
+  nav?.addEventListener("pointerleave", () => moveIndicator(currentLink()));
+  nav?.addEventListener("focusout", (e) => { if (!nav.contains(e.relatedTarget)) moveIndicator(currentLink()); });
+
   const sections = navLinks.map((a) => $(a.getAttribute("href"))).filter(Boolean);
   if ("IntersectionObserver" in window && sections.length) {
-    const visible = new Map();
+    const ratios = new Map();
     const spy = new IntersectionObserver((entries) => {
-      entries.forEach((e) => visible.set(e.target.id, e.intersectionRatio));
-      let best = null;
-      let bestRatio = 0;
-      visible.forEach((r, id) => { if (r > bestRatio) { best = id; bestRatio = r; } });
+      entries.forEach((e) => ratios.set(e.target.id, e.isIntersecting ? e.intersectionRatio + 0.0001 : 0));
+      let best = null, bestR = 0;
+      ratios.forEach((r, id) => { if (r > bestR) { best = id; bestR = r; } });
       navLinks.forEach((a) => {
         if (best && a.getAttribute("href") === `#${best}`) a.setAttribute("aria-current", "true");
         else a.removeAttribute("aria-current");
       });
-    }, { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.01, 0.25, 0.5, 1] });
+      if (!nav?.matches(":hover")) moveIndicator(currentLink());
+    }, { rootMargin: "-35% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] });
     sections.forEach((s) => spy.observe(s));
   }
 
-  /* ---------- Mobile menu ---------- */
+  /* =======================================================
+     Mobile menu
+     ======================================================= */
   const menuBtn = $("#menu-toggle");
-  const nav = $("#site-nav");
   const setMenu = (open, { focusBtn = false } = {}) => {
     if (!menuBtn || !nav) return;
     menuBtn.setAttribute("aria-expanded", String(open));
     menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     nav.classList.toggle("is-open", open);
-    if (open) $("a", nav)?.focus();
+    header?.classList.remove("is-hidden");
+    if (open) setTimeout(() => $("a", nav)?.focus(), 50);
     else if (focusBtn) menuBtn.focus();
   };
   menuBtn?.addEventListener("click", () => setMenu(menuBtn.getAttribute("aria-expanded") !== "true"));
@@ -146,87 +250,215 @@
   document.addEventListener("click", (e) => {
     if (nav?.classList.contains("is-open") && !nav.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
   });
-  window.matchMedia("(min-width: 861px)").addEventListener?.("change", (e) => { if (e.matches) setMenu(false); });
+  window.matchMedia("(min-width: 881px)").addEventListener?.("change", (e) => { if (e.matches) setMenu(false); });
 
-  /* ---------- Skip link / in-page anchors: move focus to target ---------- */
+  /* =======================================================
+     In-page anchors: scroll + move focus to the target
+     ======================================================= */
+  const focusTarget = (el) => {
+    if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+    el.focus({ preventScroll: true });
+  };
   document.addEventListener("click", (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
     const id = a.getAttribute("href");
-    if (id === "#" || id.length < 2) return;
-    const target = id === "#top" ? $("#main") : $(id);
+    if (id.length < 2) return;
+    const top = id === "#top" || id === "#main";
+    const target = top ? $("#main") : $(id);
     if (!target) return;
     e.preventDefault();
-    if (id === "#top" || id === "#main") window.scrollTo({ top: 0 });
+    if (top) window.scrollTo({ top: 0 });
     else target.scrollIntoView({ block: "start" });
-    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-    target.focus({ preventScroll: true });
-    window.history.replaceState(null, "", id === "#top" ? location.pathname : id);
+    focusTarget(target);
+    window.history.replaceState(null, "", top ? location.pathname : id);
   });
 
-  /* ---------- Reveal on scroll ---------- */
+  /* =======================================================
+     Reveal on scroll (fade/rise, 3D word flips, line drawing)
+     ======================================================= */
   const revealEls = $$(".reveal");
+  const wordTitles = $$("[data-split-words]");
+  const workCards = $$(".work-card");
   if ("IntersectionObserver" in window) {
     const groups = new Map();
     revealEls.forEach((el) => {
-      const parent = el.parentElement;
-      const i = groups.get(parent) || 0;
-      groups.set(parent, i + 1);
-      el.style.setProperty("--d", `${Math.min(i, 6) * 70}ms`);
+      const i = groups.get(el.parentElement) || 0;
+      groups.set(el.parentElement, i + 1);
+      el.style.setProperty("--d", `${Math.min(i, 6) * 80}ms`);
     });
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        e.target.classList.add(e.target.matches("[data-split-words]") ? "is-in" : e.target.matches(".work-card") ? "is-drawn" : "is-visible");
+        io.unobserve(e.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    revealEls.forEach((el) => io.observe(el));
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+    [...revealEls, ...wordTitles, ...workCards].forEach((el) => io.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add("is-visible"));
+    wordTitles.forEach((el) => el.classList.add("is-in"));
+    workCards.forEach((el) => el.classList.add("is-drawn"));
   }
-  // Content must never stay hidden: e.g. when jumping straight to an anchor or printing
   window.addEventListener("beforeprint", () => revealEls.forEach((el) => el.classList.add("is-visible")));
 
-  /* ---------- Card spotlight (decorative) ---------- */
-  document.addEventListener("pointermove", (e) => {
-    const card = e.target.closest?.(".card");
-    if (!card) return;
-    const r = card.getBoundingClientRect();
-    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    card.style.setProperty("--my", `${e.clientY - r.top}px`);
-  }, { passive: true });
+  /* =======================================================
+     Scroll engine — every scroll-linked 3D effect in one rAF
+     ======================================================= */
+  const hero = $(".hero");
+  const heroInner = $("[data-hero]");
+  const heroLetters = $$(".hero-name .ch");
+  const portrait = $(".hero-portrait");
+  const strips = $$("[data-strip]");
+  const rises = $$("[data-rise]");
+  const zoomEl = $("[data-zoom]");
+  const workItems = $$(".work-item");
+  const stickyMQ = window.matchMedia("(min-width: 901px)");
 
-  /* ---------- Role rotator ---------- */
-  const ROLES = ["mobile apps", "React Native + Expo", "generative AI", "autonomous agents", "Agentforce flows", "bad puns"];
-  const rotator = $("#rotator");
-  let roleIdx = 0;
-  let roleTimer = null;
-  const stepRole = () => {
-    const word = $(".rotator-word", rotator);
-    if (!word) return;
-    word.classList.add("is-out");
-    setTimeout(() => {
-      roleIdx = (roleIdx + 1) % ROLES.length;
-      word.textContent = ROLES[roleIdx];
-      word.classList.remove("is-out");
-      word.classList.add("is-in");
-      setTimeout(() => word.classList.remove("is-in"), 500);
-    }, 340);
+  const clearScrollFx = () => {
+    [heroInner, ...heroLetters, ...rises, zoomEl].forEach((el) => { if (el) { el.style.transform = ""; el.style.opacity = ""; } });
+    strips.forEach((el) => el.style.removeProperty("--sx"));
+    workCards.forEach((c) => { c.style.removeProperty("--s"); c.style.removeProperty("--r"); c.style.removeProperty("--dim"); });
+    portrait?.style.removeProperty("--py");
+    highlightWords.forEach((w) => w.classList.add("on"));
   };
-  const runRotator = (on) => {
-    clearInterval(roleTimer);
-    roleTimer = on && rotator ? setInterval(() => { if (!document.hidden) stepRole(); }, 2600) : null;
-  };
-  runRotator(motionOK());
-  onMotionChange(runRotator);
 
-  /* ---------- Local time (IST) ---------- */
-  const timeEl = $("#local-time");
-  if (timeEl) {
+  let scheduled = false;
+  const frame = () => {
+    scheduled = false;
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+
+    // header + progress (always on — not motion)
+    header?.classList.toggle("is-scrolled", y > 8);
+    const goingDown = y > lastY + 4;
+    const goingUp = y < lastY - 4;
+    const menuOpen = nav?.classList.contains("is-open");
+    const headerHasFocus = header?.contains(document.activeElement);
+    if (goingDown && y > 480 && !menuOpen && !headerHasFocus) header?.classList.add("is-hidden");
+    else if (goingUp || y < 480) header?.classList.remove("is-hidden");
+    lastY = y;
+    const max = document.documentElement.scrollHeight - vh;
+    progressEl?.style.setProperty("--progress", max > 0 ? (y / max).toFixed(4) : 0);
+
+    if (!motionOK()) return;
+
+    // Hero: the whole stage tilts back in 3D as you leave it; letters peel away
+    if (hero && heroInner) {
+      const h = hero.offsetHeight || 1;
+      const p = clamp(y / h);
+      heroInner.style.transform = `translate3d(0, ${p * 90}px, 0) rotateX(${p * 16}deg) scale(${1 - p * 0.08})`;
+      heroInner.style.opacity = String(1 - p * 0.85);
+      heroLetters.forEach((ch, i) => {
+        const lp = clamp(p * 1.8 - i * 0.045);
+        ch.style.transform = `translate3d(0, ${-lp * (30 + (i % 3) * 18)}px, 0) rotateX(${lp * 65}deg)`;
+      });
+      portrait?.style.setProperty("--py", `${p * 40}px`);
+    }
+
+    // Strip: rows slide in opposite directions, linked to scroll
+    strips.forEach((row) => {
+      const r = row.parentElement.getBoundingClientRect();
+      const q = clamp((vh - r.top) / (vh + r.height));
+      const span = Math.max(0, row.scrollWidth - innerWidth);
+      const dir = Number(row.dataset.strip);
+      const x = dir < 0 ? -q * span * 0.55 : -span * 0.6 + q * span * 0.55;
+      row.style.setProperty("--sx", `${x.toFixed(1)}px`);
+    });
+
+    // About: words light up as the paragraph passes through the viewport
+    if (highlightEl && highlightWords.length) {
+      const r = highlightEl.getBoundingClientRect();
+      const q = clamp((vh * 0.85 - r.top) / (r.height + vh * 0.35));
+      const n = Math.round(q * highlightWords.length);
+      highlightWords.forEach((w, i) => w.classList.toggle("on", i < n));
+    }
+
+    // Expertise: cards rise up from a reclined 3D angle
+    rises.forEach((card, i) => {
+      const r = card.getBoundingClientRect();
+      const q = clamp((vh - r.top) / (vh * 0.45) - (i % 4) * 0.12);
+      card.style.transform = `translate3d(0, ${(1 - q) * 90}px, 0) rotateX(${(1 - q) * 38}deg)`;
+      card.style.opacity = String(0.2 + q * 0.8);
+    });
+
+    // Work: sticky stack — each card recedes in 3D as the next covers it
+    const stacking = stickyMQ.matches;
+    workCards.forEach((card, i) => {
+      const next = workItems[i + 1];
+      if (!stacking || !next) {
+        card.style.removeProperty("--s"); card.style.removeProperty("--r"); card.style.removeProperty("--dim");
+        return;
+      }
+      const cr = card.getBoundingClientRect();
+      const nr = next.getBoundingClientRect();
+      const p = clamp(1 - (nr.top - cr.top) / (cr.height || 1));
+      card.style.setProperty("--s", (1 - p * 0.08).toFixed(4));
+      card.style.setProperty("--r", `${(-p * 9).toFixed(2)}deg`);
+      card.style.setProperty("--dim", (p * 0.28).toFixed(3));
+    });
+
+    // Contact: headline scales up into place
+    if (zoomEl) {
+      const r = zoomEl.getBoundingClientRect();
+      const q = clamp((vh - r.top) / (vh * 0.7));
+      zoomEl.style.transform = `translate3d(0, ${(1 - q) * 80}px, 0) scale(${0.82 + q * 0.18})`;
+      zoomEl.style.opacity = String(0.25 + q * 0.75);
+    }
+  };
+  const requestFrame = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(frame); } };
+  window.addEventListener("scroll", requestFrame, { passive: true });
+  window.addEventListener("resize", requestFrame, { passive: true });
+  motionListeners.add((on) => { if (!on) clearScrollFx(); requestFrame(); });
+  if (!motionOK()) clearScrollFx();
+  requestFrame();
+
+  /* =======================================================
+     Micro-interactions: 3D tilt + magnetic buttons
+     ======================================================= */
+  const canHover = () => finePointer.matches && motionOK();
+
+  $$("[data-tilt]").forEach((el) => {
+    const isPortrait = el.classList.contains("hero-portrait");
+    const strength = isPortrait ? 12 : 8;
+    el.addEventListener("pointermove", (e) => {
+      if (!canHover()) return;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      el.classList.add("is-tilting");
+      el.style.setProperty("--rx", `${((0.5 - y) * strength).toFixed(2)}deg`);
+      el.style.setProperty("--ry", `${((x - 0.5) * strength).toFixed(2)}deg`);
+      el.style.setProperty("--gx", `${(x * 100).toFixed(1)}%`);
+      el.style.setProperty("--gy", `${(y * 100).toFixed(1)}%`);
+      if (isPortrait) el.style.setProperty("--px", `${((0.5 - x) * 14).toFixed(1)}px`);
+    });
+    el.addEventListener("pointerleave", () => {
+      el.classList.remove("is-tilting");
+      ["--rx", "--ry", "--px"].forEach((p) => el.style.removeProperty(p));
+    });
+  });
+
+  $$("[data-magnetic]").forEach((el) => {
+    el.addEventListener("pointermove", (e) => {
+      if (!canHover()) return;
+      const r = el.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate3d(${(dx * 0.22).toFixed(1)}px, ${(dy * 0.3).toFixed(1)}px, 0)`;
+    });
+    el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+  });
+
+  /* =======================================================
+     Clocks, year, jokes, copy email
+     ======================================================= */
+  const clocks = $$("[data-clock]");
+  if (clocks.length) {
     const fmt = new Intl.DateTimeFormat("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" });
     const tick = () => {
       const now = new Date();
-      timeEl.textContent = `${fmt.format(now)} IST`;
-      timeEl.dateTime = now.toISOString();
+      clocks.forEach((t) => { t.textContent = `${fmt.format(now).toUpperCase()} IST`; t.dateTime = now.toISOString(); });
     };
     tick();
     setInterval(tick, 30000);
@@ -234,15 +466,12 @@
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- Jokes ---------- */
   const JOKES = [
     "I told my agent to take a break. It spawned three sub-agents to plan the break.",
     "Why do Java developers wear glasses? Because they don’t C#.",
-    "My model has 77% accuracy. The other 23% is a strong personality.",
     "There are 10 kinds of people: those who understand binary and those who don’t.",
     "I would tell you a UDP joke, but you might not get it.",
     "React Native: write once, debug everywhere.",
-    "My code doesn’t have bugs. It has surprise features with an agentic roadmap.",
     "A SQL query walks into a bar, walks up to two tables and asks: “Can I join you?”",
     "Governor limits are just Salesforce’s way of saying “touch grass”.",
     "I asked the LLM for a joke about recursion. It asked me for a joke about recursion.",
@@ -250,7 +479,7 @@
   let jokeIdx = -1;
   const nextJoke = () => {
     let i;
-    do { i = Math.floor(Math.random() * JOKES.length); } while (i === jokeIdx && JOKES.length > 1);
+    do { i = Math.floor(Math.random() * JOKES.length); } while (i === jokeIdx);
     jokeIdx = i;
     return JOKES[i];
   };
@@ -261,7 +490,6 @@
     jokeBtn.textContent = "Another one";
   });
 
-  /* ---------- Copy email ---------- */
   async function copyEmail() {
     let ok = false;
     try {
@@ -271,8 +499,7 @@
       const ta = document.createElement("textarea");
       ta.value = EMAIL;
       ta.setAttribute("readonly", "");
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
+      ta.style.cssText = "position:fixed;opacity:0";
       document.body.appendChild(ta);
       ta.select();
       try { ok = document.execCommand("copy"); } catch { ok = false; }
@@ -285,77 +512,28 @@
     btn.addEventListener("click", async () => {
       const ok = await copyEmail();
       const label = $("[data-copy-label]", btn);
-      const use = $(".icon-copy use", btn);
+      const use = $("[data-copy-icon]", btn);
       if (!ok || !label) return;
-      label.textContent = "Copied!";
+      label.textContent = "Copied";
       use?.setAttribute("href", "#i-check");
       setTimeout(() => { label.textContent = "Copy email"; use?.setAttribute("href", "#i-copy"); }, 2200);
     });
   });
 
-  /* ---------- Stack filter ---------- */
-  const stackInput = $("#stack-search");
-  const stackGroups = $$(".stack-group");
-  const stackCount = $("#stack-count");
-  const stackEmpty = $("#stack-empty");
-  const totalChips = $$(".stack-group .chips li").length;
-  if (stackCount) stackCount.textContent = `${totalChips} technologies across ${stackGroups.length} areas.`;
-  let stackTimer;
-  stackInput?.addEventListener("input", () => {
-    clearTimeout(stackTimer);
-    stackTimer = setTimeout(() => {
-      const q = stackInput.value.trim().toLowerCase();
-      let matches = 0;
-      stackGroups.forEach((g) => {
-        let groupHit = 0;
-        const groupName = $("h3", g).textContent.toLowerCase();
-        $$(".chips li", g).forEach((li) => {
-          const hit = q && (li.textContent.toLowerCase().includes(q) || groupName.includes(q));
-          li.classList.toggle("is-match", Boolean(hit));
-          li.classList.toggle("is-dim", Boolean(q) && !hit);
-          if (hit) groupHit++;
-        });
-        g.hidden = Boolean(q) && groupHit === 0;
-        matches += groupHit;
-      });
-      if (stackEmpty) stackEmpty.hidden = !(q && matches === 0);
-      if (stackCount) {
-        stackCount.textContent = !q
-          ? `${totalChips} technologies across ${stackGroups.length} areas.`
-          : matches === 0 ? `No matches for “${q}”.` : `${matches} match${matches === 1 ? "" : "es"} for “${q}”.`;
-      }
-    }, 120);
-  });
-
-  /* ---------- Project filters ---------- */
-  const filterBtns = $$(".filter");
-  const projects = $$(".project");
-  const workStatus = $("#work-status");
-  const applyFilter = (key) => {
-    let shown = 0;
-    filterBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === key)));
-    projects.forEach((p) => {
-      const show = key === "all" || p.dataset.tags.split(" ").includes(key);
-      p.hidden = !show;
-      if (show) { shown++; p.classList.add("is-visible"); }
-    });
-    const label = filterBtns.find((b) => b.dataset.filter === key)?.textContent.trim();
-    if (workStatus) workStatus.textContent = `Showing ${shown} ${shown === 1 ? "project" : "projects"}${key === "all" ? "" : ` in ${label}`}.`;
-  };
-  filterBtns.forEach((b) => b.addEventListener("click", () => applyFilter(b.dataset.filter)));
-
-  /* ---------- Live GitHub data (stars + language), best effort ---------- */
-  const repoCards = $$("[data-repo]");
-  if (repoCards.length && "fetch" in window) {
-    const CACHE_KEY = "gh-repos-v1";
+  /* =======================================================
+     Live GitHub data (language + stars), best effort
+     ======================================================= */
+  const repoEls = $$("[data-repo]");
+  if (repoEls.length && "fetch" in window) {
+    const KEY = "gh-repos-v1";
     const paint = (repos) => {
       const byName = new Map(repos.map((r) => [r.name.toLowerCase(), r]));
-      repoCards.forEach((card) => {
-        const r = byName.get(card.dataset.repo.toLowerCase());
+      repoEls.forEach((el) => {
+        const r = byName.get(el.dataset.repo.toLowerCase());
         if (!r) return;
-        const lang = $("[data-lang]", card);
+        const lang = $("[data-lang]", el);
         if (lang && r.language) lang.textContent = r.language;
-        const stars = $("[data-stars]", card);
+        const stars = $("[data-stars]", el);
         if (stars && r.stargazers_count > 0) {
           stars.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>${r.stargazers_count}<span class="sr-only"> GitHub stars</span>`;
           stars.hidden = false;
@@ -363,7 +541,7 @@
       });
     };
     let cached = null;
-    try { cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || "null"); } catch { /* ignore */ }
+    try { cached = JSON.parse(sessionStorage.getItem(KEY) || "null"); } catch { /* ignore */ }
     if (cached) paint(cached);
     else {
       const ctrl = new AbortController();
@@ -373,320 +551,88 @@
         .then((data) => {
           if (!Array.isArray(data)) return;
           const slim = data.map(({ name, language, stargazers_count }) => ({ name, language, stargazers_count }));
-          try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(slim)); } catch { /* ignore */ }
+          try { sessionStorage.setItem(KEY, JSON.stringify(slim)); } catch { /* ignore */ }
           paint(slim);
         })
-        .catch(() => { /* offline or rate-limited — static content already rendered */ });
+        .catch(() => { /* offline or rate-limited — static content already shows */ });
     }
   }
 
-  /* ---------- Hero canvas: an "agent network" ---------- */
-  const canvas = $(".hero-canvas");
-  if (canvas && canvas.getContext) {
-    const ctx = canvas.getContext("2d");
-    const hero = canvas.parentElement;
-    let w = 0, h = 0, dpr = 1, nodes = [], raf = null, inView = true;
-    const pointer = { x: -9999, y: -9999 };
-
-    const colors = () => {
-      const light = currentTheme() === "light";
-      return {
-        node: light ? "rgba(3,105,161,0.55)" : "rgba(54,188,247,0.75)",
-        hot: light ? "rgba(4,120,87,0.9)" : "rgba(122,240,196,0.95)",
-        line: light ? "3,105,161" : "54,188,247",
-      };
-    };
-
-    const resize = () => {
-      const rect = hero.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = rect.width; h = rect.height;
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.round(Math.min(90, Math.max(28, (w * h) / 16000)));
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.6 + 0.8,
-        pulse: Math.random() * Math.PI * 2,
-      }));
-      draw(false);
-    };
-
-    const LINK = 130;
-    const draw = (step) => {
-      const c = colors();
-      ctx.clearRect(0, 0, w, h);
-      for (const n of nodes) {
-        if (step) {
-          n.x += n.vx; n.y += n.vy; n.pulse += 0.03;
-          if (n.x < 0 || n.x > w) n.vx *= -1;
-          if (n.y < 0 || n.y > h) n.vy *= -1;
-          const dx = n.x - pointer.x, dy = n.y - pointer.y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < 140 * 140 && d2 > 1) { // gentle repel around the pointer
-            const f = (1 - Math.sqrt(d2) / 140) * 0.6;
-            n.x += (dx / Math.sqrt(d2)) * f;
-            n.y += (dy / Math.sqrt(d2)) * f;
-          }
-        }
-      }
-      for (let i = 0; i < nodes.length; i++) {
-        const a = nodes[i];
-        for (let j = i + 1; j < nodes.length; j++) {
-          const b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const d = Math.hypot(dx, dy);
-          if (d < LINK) {
-            ctx.strokeStyle = `rgba(${c.line},${(1 - d / LINK) * 0.22})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          }
-        }
-      }
-      for (const n of nodes) {
-        const near = Math.hypot(n.x - pointer.x, n.y - pointer.y) < 160;
-        ctx.fillStyle = near ? c.hot : c.node;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r + (near ? 1.2 : Math.sin(n.pulse) * 0.4), 0, Math.PI * 2);
-        ctx.fill();
-      }
-    };
-
-    const loop = () => { draw(true); raf = requestAnimationFrame(loop); };
-    const start = () => { if (!raf && inView && !document.hidden && motionOK()) raf = requestAnimationFrame(loop); };
-    const stop = () => { if (raf) cancelAnimationFrame(raf); raf = null; };
-
-    hero.addEventListener("pointermove", (e) => {
-      const r = hero.getBoundingClientRect();
-      pointer.x = e.clientX - r.left; pointer.y = e.clientY - r.top;
-    }, { passive: true });
-    hero.addEventListener("pointerleave", () => { pointer.x = pointer.y = -9999; });
-
-    let resizeTimer;
-    window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); });
-    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(([e]) => { inView = e.isIntersecting; inView ? start() : stop(); }).observe(hero);
-    }
-    onMotionChange((on) => (on ? start() : (stop(), draw(false))));
-    themeBtn?.addEventListener("click", () => { if (!raf) draw(false); });
-
-    resize();
-    start();
-  }
-
-  /* ---------- Interactive terminal ---------- */
-  const tLog = $("#terminal-log");
-  const tForm = $("#terminal-form");
-  const tInput = $("#terminal-input");
-  const tBody = $("#terminal-body");
-  const cmdHistory = [];
-  let histIdx = -1;
-
-  const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const ext = (href, label) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}<span class="sr-only"> (opens in new tab)</span></a>`;
-
-  const COMMANDS = {
-    help: {
-      desc: "list commands",
-      run: () => Object.entries(COMMANDS)
-        .filter(([, c]) => !c.hidden)
-        .map(([k, c]) => `<span class="t-accent">${k.padEnd(10)}</span> ${c.desc}`)
-        .join("\n"),
-    },
-    whoami: { desc: "who is this guy?", run: () => "Sai Chandan — mobile app developer & AI/ML engineer.\nI make agents do the boring part." },
-    skills: {
-      desc: "what I work with",
-      run: () => [
-        `<span class="t-accent">mobile</span>    React Native · Expo · EAS · Expo Router`,
-        `<span class="t-accent">ai/ml</span>     PyTorch · TensorFlow · scikit-learn · OpenCV`,
-        `<span class="t-accent">agents</span>    Claude Agent SDK · Gemini · MCP · Agentforce`,
-        `<span class="t-accent">web</span>       React · Next.js · Tailwind · Node · FastAPI`,
-        `<span class="t-accent">data</span>      Postgres · MongoDB · MySQL · Supabase`,
-        `<span class="t-accent">cloud</span>     AWS · Vercel · Docker · GitHub Actions`,
-      ].join("\n"),
-    },
-    projects: {
-      desc: "featured work",
-      run: () => $$(".project h3").map((h, i) => `${String(i + 1).padStart(2, "0")}  ${esc(h.textContent)}`).join("\n") + `\n\n<a href="#work">Jump to the Work section</a> · or try <code>open github</code>`,
-    },
-    now: { desc: "what I’m learning", run: () => $$(".learning h3").map((h) => `→ ${esc(h.textContent)}`).join("\n") },
-    contact: { desc: "say hi", run: () => `email     <a href="mailto:${EMAIL}">${EMAIL}</a>\nlinkedin  ${ext(LINKS.linkedin, "reddy-sai-chandan")}\nx         ${ext(LINKS.x, "@saichandan181")}` },
-    socials: { desc: "find me online", run: () => Object.entries(LINKS).map(([k, v]) => `${k.padEnd(10)}${ext(v, v.replace(/^https?:\/\/(www\.)?/, ""))}`).join("\n") },
-    open: {
-      desc: "open github | linkedin | x | instagram | resume",
-      run: (arg) => {
-        const key = (arg || "").toLowerCase();
-        const url = key === "resume" ? RESUME : LINKS[key === "twitter" ? "x" : key];
-        if (!url) return `<span class="t-err">usage: open github | linkedin | x | instagram | resume</span>`;
-        window.open(url, "_blank", "noopener");
-        return `Opening ${esc(key)} in a new tab…`;
-      },
-    },
-    philosophy: { desc: "my one rule", run: () => "“If I do it twice, an agent should do it the third time.”" },
-    joke: { desc: "I think I am funny", run: () => esc(nextJoke()) },
-    theme: { desc: "toggle light / dark", run: () => { toggleTheme(); return `Theme set to ${currentTheme()}.`; } },
-    date: { desc: "local time in Bengaluru", run: () => new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "full", timeStyle: "short" }) + " IST" },
-    clear: { desc: "clear the screen", run: () => { tLog.innerHTML = ""; return null; } },
-    sudo: {
-      hidden: true,
-      run: (arg) => (arg === "hire-me" || arg === "hire me")
-        ? `[sudo] password for recruiter: ********\n<span class="t-accent">✔ Access granted.</span> Great choice.\nDrafting an email to <a href="mailto:${EMAIL}?subject=Let%E2%80%99s%20work%20together">${EMAIL}</a>…`
-        : `<span class="t-err">Nice try. This incident will be reported.</span>`,
-    },
-    ls: { hidden: true, run: () => "about.yaml  projects/  skills.json  secrets.txt" },
-    cat: { hidden: true, run: (arg) => arg === "secrets.txt" ? "I still google how to center a div. 🤫" : arg === "about.yaml" ? "Scroll up — it’s right there 👆" : `<span class="t-err">cat: ${esc(arg || "")}: No such file</span>` },
-    rm: { hidden: true, run: () => `<span class="t-err">Permission denied. Nice try though.</span>` },
-    hello: { hidden: true, run: () => "Hey there 👋 — type <code>help</code> to look around." },
-    exit: { hidden: true, run: () => "There is no escape. Only <code>help</code>." },
-  };
-  COMMANDS.hi = COMMANDS.hello;
-  COMMANDS.hire = { hidden: true, run: () => COMMANDS.sudo.run("hire-me") };
-
-  const print = (cmd, html) => {
-    const line = document.createElement("div");
-    line.className = "t-line";
-    line.innerHTML = `<span class="t-prompt" aria-hidden="true">❯</span> <span class="t-cmd">${esc(cmd)}</span>`;
-    tLog.appendChild(line);
-    if (html) {
-      const out = document.createElement("pre");
-      out.className = "t-out";
-      out.innerHTML = html;
-      tLog.appendChild(out);
-    }
-    tLog.scrollTop = tLog.scrollHeight;
-  };
-
-  const runCommand = (raw) => {
-    const input = raw.trim();
-    if (!input) return;
-    cmdHistory.unshift(input);
-    histIdx = -1;
-    const [name, ...rest] = input.split(/\s+/);
-    const cmd = COMMANDS[name.toLowerCase()];
-    if (!cmd) {
-      print(input, `<span class="t-err">command not found: ${esc(name)}</span> — try <code>help</code>`);
-      return;
-    }
-    const out = cmd.run(rest.join(" ").toLowerCase());
-    if (out === null) return; // clear
-    print(input, out);
-  };
-
-  if (tForm && tInput && tLog) {
-    tForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      runCommand(tInput.value);
-      tInput.value = "";
-    });
-    tInput.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowUp" && cmdHistory.length) {
-        e.preventDefault();
-        histIdx = Math.min(histIdx + 1, cmdHistory.length - 1);
-        tInput.value = cmdHistory[histIdx];
-      } else if (e.key === "ArrowDown") {
-        e.preventDefault();
-        histIdx = Math.max(histIdx - 1, -1);
-        tInput.value = histIdx === -1 ? "" : cmdHistory[histIdx];
-      } else if (e.key === "Tab" && tInput.value.trim()) {
-        const partial = tInput.value.trim().toLowerCase();
-        const match = Object.keys(COMMANDS).find((k) => !COMMANDS[k].hidden && k.startsWith(partial));
-        if (match && match !== partial) { e.preventDefault(); tInput.value = match + " "; }
-      }
-    });
-    // Clicking empty terminal space focuses the prompt (but don't steal clicks on links / text selection)
-    tBody?.addEventListener("click", (e) => {
-      if (e.target.closest("a") || window.getSelection()?.toString()) return;
-      tInput.focus({ preventScroll: true });
-    });
-    $$(".terminal-chips [data-cmd]").forEach((b) => b.addEventListener("click", () => runCommand(b.dataset.cmd)));
-  }
-
-  /* ---------- Command palette ---------- */
+  /* =======================================================
+     Command palette (Ctrl/⌘ + K)
+     ======================================================= */
   const palette = $("#palette");
   const pInput = $("#palette-input");
   const pList = $("#palette-list");
   const pStatus = $("#palette-status");
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-  $$("[data-mod-key]").forEach((k) => { k.textContent = isMac ? "⌘ K" : "Ctrl K"; });
+  $$("[data-mod-key]").forEach((k) => { k.textContent = isMac ? "⌘K" : "Ctrl K"; });
 
   const go = (hash) => () => {
     const el = $(hash);
     if (!el) return;
     el.scrollIntoView({ block: "start" });
-    if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
-    el.focus({ preventScroll: true });
-    window.history.replaceState?.(null, "", hash);
+    focusTarget(el);
+    window.history.replaceState(null, "", hash);
   };
   const openUrl = (url) => () => window.open(url, "_blank", "noopener");
 
   const ITEMS = [
-    { group: "Go to", label: "About", icon: "i-arrow-right", run: go("#about"), keys: "who bio" },
-    { group: "Go to", label: "Stack", icon: "i-arrow-right", run: go("#stack"), keys: "skills tech tools" },
-    { group: "Go to", label: "Work", icon: "i-arrow-right", run: go("#work"), keys: "projects portfolio" },
+    { group: "Go to", label: "About", icon: "i-arrow-right", run: go("#about"), keys: "who bio education" },
+    { group: "Go to", label: "Expertise", icon: "i-arrow-right", run: go("#expertise"), keys: "skills stack tech tools mobile ai salesforce" },
+    { group: "Go to", label: "Selected work", icon: "i-arrow-right", run: go("#work"), keys: "projects portfolio" },
     { group: "Go to", label: "Now", icon: "i-arrow-right", run: go("#now"), keys: "learning ask" },
     { group: "Go to", label: "Contact", icon: "i-arrow-right", run: go("#contact"), keys: "email hire" },
     { group: "Actions", label: "Copy email address", icon: "i-copy", run: copyEmail, keys: "mail clipboard" },
     { group: "Actions", label: "Send an email", icon: "i-mail", run: () => { location.href = `mailto:${EMAIL}`; }, keys: "mail contact" },
     { group: "Actions", label: "Download résumé (PDF)", icon: "i-file", run: () => { const a = document.createElement("a"); a.href = RESUME; a.download = "Sai-Chandan-Resume.pdf"; a.click(); }, keys: "cv resume" },
-    { group: "Actions", label: "Toggle light / dark theme", icon: "i-sun", run: toggleTheme, keys: "dark light mode color" },
-    { group: "Actions", label: "Pause or play animations", icon: "i-pause", run: toggleMotion, keys: "motion reduce accessibility" },
-    { group: "Actions", label: "Open the terminal", icon: "i-terminal", run: () => { tInput?.scrollIntoView({ block: "center" }); tInput?.focus({ preventScroll: true }); }, keys: "cli shell command" },
-    { group: "Actions", label: "Tell me a joke", icon: "i-smile", run: () => toast(nextJoke()), keys: "funny fun" },
+    { group: "Actions", label: "Toggle light / dark theme", icon: "i-sun", run: () => toggleTheme(themeBtn), keys: "dark light mode color" },
+    { group: "Actions", label: "Reduce or restore motion", icon: "i-pause", run: toggleMotion, keys: "animation accessibility" },
+    { group: "Actions", label: "Tell me a joke", icon: "i-arrow-right", run: () => toast(nextJoke()), keys: "funny fun" },
     { group: "Profiles", label: "GitHub", icon: "i-github", run: openUrl(LINKS.github), hint: "↗", keys: "code repos" },
     { group: "Profiles", label: "LinkedIn", icon: "i-linkedin", run: openUrl(LINKS.linkedin), hint: "↗", keys: "work" },
     { group: "Profiles", label: "X (Twitter)", icon: "i-x", run: openUrl(LINKS.x), hint: "↗", keys: "twitter" },
     { group: "Profiles", label: "Instagram", icon: "i-instagram", run: openUrl(LINKS.instagram), hint: "↗", keys: "photos" },
     { group: "Profiles", label: "Buy me a coffee", icon: "i-coffee", run: openUrl(LINKS.coffee), hint: "↗", keys: "support donate" },
   ];
-  $$(".project").forEach((p) => {
+  $$(".work-item").forEach((p) => {
     const title = $("h3", p)?.textContent.trim();
-    const link = $(".project-links a", p)?.href;
-    if (title && link) ITEMS.push({ group: "Projects", label: title, icon: "i-arrow-up-right", run: openUrl(link), hint: "↗", keys: p.dataset.tags });
+    const link = $(".work-links a", p)?.href;
+    if (title && link) ITEMS.push({ group: "Projects", label: title, icon: "i-arrow-up-right", run: openUrl(link), hint: "↗" });
+  });
+  $$(".earlier a").forEach((a) => {
+    ITEMS.push({ group: "Projects", label: $(".earlier-name", a).textContent.trim(), icon: "i-arrow-up-right", run: openUrl(a.href), hint: "↗" });
   });
 
   let filtered = ITEMS;
   let active = 0;
-
   const score = (item, q) => {
     if (!q) return 1;
     const hay = `${item.label} ${item.keys || ""} ${item.group}`.toLowerCase();
     if (item.label.toLowerCase().startsWith(q)) return 3;
     if (hay.includes(q)) return 2;
-    // loose subsequence match
     let i = 0;
     for (const ch of hay) if (ch === q[i]) i++;
     return i === q.length ? 1 : 0;
   };
-
+  const syncActive = () => {
+    $$(".palette-option", pList).forEach((li, i) => li.setAttribute("aria-selected", String(i === active)));
+    const el = $(`#pal-opt-${active}`);
+    if (el) { pInput.setAttribute("aria-activedescendant", el.id); el.scrollIntoView({ block: "nearest" }); }
+    else pInput.removeAttribute("aria-activedescendant");
+  };
   const renderPalette = () => {
     const q = pInput.value.trim().toLowerCase();
-    filtered = ITEMS.map((it) => ({ it, s: score(it, q) }))
-      .filter((x) => x.s > 0)
-      .sort((a, b) => (q ? b.s - a.s : 0))
-      .map((x) => x.it);
+    filtered = ITEMS.map((it) => ({ it, s: score(it, q) })).filter((x) => x.s > 0).sort((a, b) => (q ? b.s - a.s : 0)).map((x) => x.it);
     active = Math.min(active, Math.max(filtered.length - 1, 0));
     pList.innerHTML = "";
     if (!filtered.length) {
-      const li = document.createElement("li");
-      li.className = "palette-empty";
-      li.setAttribute("role", "presentation");
-      li.textContent = "No results. Try “projects” or “email”.";
-      pList.appendChild(li);
-      pInput.removeAttribute("aria-activedescendant");
+      pList.insertAdjacentHTML("beforeend", '<li class="palette-empty" role="presentation">No results. Try “projects” or “email”.</li>');
     }
     let lastGroup = null;
     filtered.forEach((it, i) => {
       if (!q && it.group !== lastGroup) {
-        const g = document.createElement("li");
-        g.className = "palette-group";
-        g.setAttribute("role", "presentation");
-        g.textContent = it.group;
-        pList.appendChild(g);
+        pList.insertAdjacentHTML("beforeend", `<li class="palette-group" role="presentation">${esc(it.group)}</li>`);
         lastGroup = it.group;
       }
       const li = document.createElement("li");
@@ -703,15 +649,6 @@
     pStatus.textContent = q ? `${filtered.length} result${filtered.length === 1 ? "" : "s"}` : "";
   };
 
-  const syncActive = () => {
-    $$(".palette-option", pList).forEach((li, i) => li.setAttribute("aria-selected", String(i === active)));
-    const el = $(`#pal-opt-${active}`);
-    if (el) {
-      pInput.setAttribute("aria-activedescendant", el.id);
-      el.scrollIntoView({ block: "nearest" });
-    }
-  };
-
   let lastFocus = null;
   const openPalette = () => {
     if (!palette || palette.open) return;
@@ -726,23 +663,21 @@
   const choose = (i) => {
     const it = filtered[i];
     if (!it) return;
-    lastFocus = null; // the action decides where focus goes
+    lastFocus = null;
     closePalette();
     it.run();
   };
-
   if (palette && pInput && pList) {
-    palette.addEventListener("close", () => {
-      if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
-    });
-    palette.addEventListener("click", (e) => { if (e.target === palette) closePalette(); }); // backdrop
+    palette.addEventListener("close", () => { if (lastFocus && document.contains(lastFocus)) lastFocus.focus(); });
+    palette.addEventListener("click", (e) => { if (e.target === palette) closePalette(); });
     $("[data-close-palette]", palette)?.addEventListener("click", closePalette);
     pInput.addEventListener("input", () => { active = 0; renderPalette(); });
     pInput.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowDown") { e.preventDefault(); active = (active + 1) % Math.max(filtered.length, 1); syncActive(); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); active = (active - 1 + filtered.length) % Math.max(filtered.length, 1); syncActive(); }
+      const n = Math.max(filtered.length, 1);
+      if (e.key === "ArrowDown") { e.preventDefault(); active = (active + 1) % n; syncActive(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); active = (active - 1 + n) % n; syncActive(); }
       else if (e.key === "Home") { e.preventDefault(); active = 0; syncActive(); }
-      else if (e.key === "End") { e.preventDefault(); active = Math.max(filtered.length - 1, 0); syncActive(); }
+      else if (e.key === "End") { e.preventDefault(); active = n - 1; syncActive(); }
       else if (e.key === "Enter") { e.preventDefault(); choose(active); }
     });
     $$("[data-open-palette]").forEach((b) => b.addEventListener("click", openPalette));
@@ -753,4 +688,12 @@
       }
     });
   }
+
+  /* =======================================================
+     Kick off the intro once fonts are ready
+     ======================================================= */
+  const ready = () => requestAnimationFrame(() => root.classList.add("is-loaded"));
+  if (document.fonts?.ready) {
+    Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]).then(ready);
+  } else ready();
 })();
